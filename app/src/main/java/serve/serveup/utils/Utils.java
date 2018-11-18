@@ -1,10 +1,12 @@
 package serve.serveup.utils;
 
+import android.content.Context;
+import android.widget.Toast;
 import java.util.regex.Pattern;
 
 
 /**
- * author: urban.jagodic
+ * author: urban_jagodic
  * Class for validating input.
  * Tool class with static methods for
  * easier validation checks.
@@ -29,7 +31,7 @@ public class Utils {
         return false;
     }
 
-    //check passwordValidity
+    //check password validity
     // must contain at least 6 chars, one upper-case letter and a number
     // (?=.*\W) for non-word char
     public static boolean isPasswordValid(String password) {
@@ -43,5 +45,10 @@ public class Utils {
     public static boolean isInRegex(String input, String regex) {
         Pattern pat = Pattern.compile(regex);
         return pat.matcher(input).matches();
+    }
+
+
+    public static void showToast(Context myContext, String message) {
+        Toast.makeText(myContext, message, Toast.LENGTH_SHORT).show();
     }
 }

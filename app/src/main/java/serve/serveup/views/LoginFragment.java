@@ -7,12 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import serve.serveup.R;
+import serve.serveup.utils.Utils;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,14 +29,6 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance(String param1, String param2) {
         LoginFragment fragment = new LoginFragment();
@@ -54,15 +47,16 @@ public class LoginFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        View googleButton = getActivity().findViewById(R.id.sign_in_button);
+        googleButton.setOnClickListener(this);
+        View signInButton = getActivity().findViewById(R.id.cardView_signin);
+        signInButton.setOnClickListener(this);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        Toast.makeText(getActivity(), "dasds", Toast.LENGTH_SHORT).show();
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -79,8 +73,7 @@ public class LoginFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -88,6 +81,18 @@ public class LoginFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.cardView_signin:
+                checkValidation();
+                break;
+            case R.id.sign_in_button:
+                googleSignIn();
+                break;
+        }
     }
 
     /**
@@ -103,5 +108,30 @@ public class LoginFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    private void checkValidation() {
+        EditText password = getActivity().findViewById(R.id.passwordField);
+        EditText email = getActivity().findViewById(R.id.emailField);
+        if (Utils.isEmailValid(email.getText().toString()) && Utils.isPasswordValid(password.getText().toString())) {
+            // continue with signup
+        }
+        else {
+            Utils.showToast(getContext(), "Invalid email or password!");
+        }
+    }
+
+    private void googleSignIn() {
+        Utils.showToast(getContext(), "Not yet implemented");
+        /*GoogleSignInUtil myGoogleUtil = new GoogleSignInUtil(getContext());
+        myGoogleUtil.setUp();
+        GoogleSignInClient mGoogleSignInClient = myGoogleUtil.mGoogleSignInClient;
+
+        int RC_SIGN_IN = 100;
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+        */
     }
 }
