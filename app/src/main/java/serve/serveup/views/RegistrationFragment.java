@@ -11,14 +11,7 @@ import android.view.ViewGroup;
 import serve.serveup.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RegistrationFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RegistrationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class RegistrationFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

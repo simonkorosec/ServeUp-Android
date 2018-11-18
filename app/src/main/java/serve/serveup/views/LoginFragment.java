@@ -48,9 +48,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
         View googleButton = getActivity().findViewById(R.id.sign_in_button);
-        googleButton.setOnClickListener(this);
         View signInButton = getActivity().findViewById(R.id.cardView_signin);
+        View signUp = getActivity().findViewById(R.id.textSignUp);
+        googleButton.setOnClickListener(this);
         signInButton.setOnClickListener(this);
+        signUp.setOnClickListener(this);
 
     }
 
@@ -92,8 +94,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.sign_in_button:
                 googleSignIn();
                 break;
+            case R.id.textSignUp:
+                signUp();
+                break;
         }
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -134,4 +140,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         startActivityForResult(signInIntent, RC_SIGN_IN);
         */
     }
+
+    private void signUp() {
+
+        View loginContainer = getActivity().findViewById(R.id.login_container);
+        loginContainer.setVisibility(View.INVISIBLE);
+        RegistrationFragment nextFrag = new RegistrationFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, nextFrag)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 }
