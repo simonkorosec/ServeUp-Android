@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment  {
         View myLayout = inflater.inflate(R.layout.fragment_login, container, false);
         signUp = myLayout.findViewById(R.id.textSignUp);
         googleButton = myLayout.findViewById(R.id.google_button);
-        signInButton = myLayout.findViewById(R.id.cardView_signin);
+        signInButton = myLayout.findViewById(R.id.button_sign_in);
 
 
         signUp.setOnClickListener(new View.OnClickListener() {
