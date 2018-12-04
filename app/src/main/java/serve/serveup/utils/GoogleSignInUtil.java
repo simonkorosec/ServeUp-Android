@@ -1,11 +1,15 @@
 package serve.serveup.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,7 +28,7 @@ public class GoogleSignInUtil {
 
     public GoogleSignInUtil(Context myContext, FirebaseAuth mAuth) {
         this.myContext = myContext;
-        this.mAuth = mAuth; //FirebaseAuth.getInstance();
+        this.mAuth = mAuth;
     }
 
     public void setUp() {
@@ -39,10 +43,8 @@ public class GoogleSignInUtil {
 
     public boolean checkIfAlreadySignedIn() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(myContext);
-        if(account != null)
-            return true;
-        else
-            return false;
+        if(account != null) return true;
+        else return false;
     }
 
     public Map<String, String> getUserInfo(FirebaseUser user) {
@@ -52,6 +54,17 @@ public class GoogleSignInUtil {
         //info.put("id_token", user.getIdToken(true));
         info.put("uid", user.getUid());
         return info;
+    }
+
+    public void signOut() {
+        mAuth.signOut();
+        mGoogleSignInClient.signOut().addOnCompleteListener((Activity)myContext,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Utils.showToast(myContext, "Signed out!");
+                    }
+                });
     }
 
 }

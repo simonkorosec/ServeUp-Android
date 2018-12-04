@@ -87,20 +87,16 @@ public class LoginFragment extends Fragment  {
         googleButton = myLayout.findViewById(R.id.google_button);
         signInButton = myLayout.findViewById(R.id.button_sign_in);
 
+        myGoogleUtil = new GoogleSignInUtil(getContext(), mAuth);
+        myGoogleUtil.setUp();
+
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
-
                 // Google sign out
-                myGoogleUtil.mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(),
-                        new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                               Utils.showToast(getActivity(), "Signed out!");
-                            }
-                        });
+                if (myGoogleUtil.checkIfAlreadySignedIn())
+                    myGoogleUtil.signOut();
             }
         });
 
@@ -161,7 +157,6 @@ public class LoginFragment extends Fragment  {
     }
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -179,7 +174,6 @@ public class LoginFragment extends Fragment  {
                             startMainPanel.putExtras(myBundle);
                             startActivity(startMainPanel);
                             Utils.showToast(getActivity(), "Signed in!");
-
                         }
                         else {
                             // If sign in fails, display a message to the user.
@@ -202,8 +196,6 @@ public class LoginFragment extends Fragment  {
     }
 
     private void googleSignIn() {
-        myGoogleUtil = new GoogleSignInUtil(getContext(), mAuth);
-        myGoogleUtil.setUp();
         Intent signInIntent = myGoogleUtil.mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
