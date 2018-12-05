@@ -1,6 +1,7 @@
 package serve.serveup.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 import java.util.regex.Pattern;
 
@@ -50,5 +51,9 @@ public class Utils {
 
     public static void showToast(Context myContext, String message) {
         Toast.makeText(myContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void logInfo(String text) {
+        Log.d("serveup_test", text);
     }
 }

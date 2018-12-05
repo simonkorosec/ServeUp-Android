@@ -11,14 +11,7 @@ import android.view.ViewGroup;
 import serve.serveup.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DiscoveryFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DiscoveryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class DiscoveryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,14 +28,7 @@ public class DiscoveryFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DiscoveryFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static DiscoveryFragment newInstance(String param1, String param2) {
         DiscoveryFragment fragment = new DiscoveryFragment();

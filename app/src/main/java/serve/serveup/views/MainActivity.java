@@ -5,7 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import serve.serveup.R;
+import serve.serveup.dataholder.UserID;
+import serve.serveup.webservices.RestManagement;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,
         RegistrationFragment.OnFragmentInteractionListener {
@@ -20,6 +27,18 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, myLoginFrag).commit();
 
+
+        RestManagement.getAllUsers().enqueue(new Callback<List<UserID>>() {
+            @Override
+            public void onResponse(Call<List<UserID>> call, Response<List<UserID>> response) {
+               // whatever you want to call
+            }
+
+            @Override
+            public void onFailure(Call<List<UserID>> call, Throwable t) {
+
+            }
+        });
 
     }
 

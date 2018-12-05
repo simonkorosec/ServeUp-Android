@@ -1,6 +1,6 @@
 package serve.serveup.dataholder;
 
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import java.io.Serializable;
 
 public class UserInfo implements Serializable {
@@ -9,10 +9,10 @@ public class UserInfo implements Serializable {
     private String displayName;
     private String uID;
 
-    public UserInfo(FirebaseUser user) {
+    public UserInfo(GoogleSignInAccount user) {
         this.email = user.getEmail();
         this.displayName = user.getDisplayName();
-        this.uID = user.getUid();
+        this.uID = user.getId();
     }
 
     public String getDisplayName() {

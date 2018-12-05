@@ -91,6 +91,7 @@ public class LoginFragment extends Fragment  {
         myGoogleUtil.setUp();
 
 
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,11 +165,10 @@ public class LoginFragment extends Fragment  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("myLayout", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             Bundle myBundle = new Bundle();
-                            myBundle.putSerializable("userInfo", new UserInfo(user));
+                            UserInfo myUserInfo = myGoogleUtil.getUserInfo();
+                            myBundle.putSerializable("userInfo", myUserInfo);
 
                             Intent startMainPanel = new Intent(getActivity(), MainPanel.class);
                             startMainPanel.putExtras(myBundle);

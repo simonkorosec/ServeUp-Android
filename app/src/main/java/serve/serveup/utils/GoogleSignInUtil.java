@@ -3,7 +3,6 @@ package serve.serveup.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -11,12 +10,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import serve.serveup.R;
+import serve.serveup.dataholder.UserInfo;
 
 public class GoogleSignInUtil {
 
@@ -24,6 +20,7 @@ public class GoogleSignInUtil {
     public GoogleSignInClient mGoogleSignInClient;
     public GoogleSignInOptions gso;
     public FirebaseAuth mAuth;
+    public GoogleSignInAccount account;
 
 
     public GoogleSignInUtil(Context myContext, FirebaseAuth mAuth) {
@@ -42,18 +39,16 @@ public class GoogleSignInUtil {
     }
 
     public boolean checkIfAlreadySignedIn() {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(myContext);
+        account = GoogleSignIn.getLastSignedInAccount(myContext);
         if(account != null) return true;
         else return false;
     }
 
-    public Map<String, String> getUserInfo(FirebaseUser user) {
-        Map<String, String> info  = new HashMap<>();
-        info.put("email", user.getEmail());
-        info.put("display_name", user.getDisplayName());
-        //info.put("id_token", user.getIdToken(true));
-        info.put("uid", user.getUid());
-        return info;
+    public UserInfo getUserInfo() {
+        if(checkIfAlreadySignedIn()) {
+            return new UserInfo(account);
+        }
+        return null;
     }
 
     public void signOut() {

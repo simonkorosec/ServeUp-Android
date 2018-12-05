@@ -2,7 +2,6 @@ package serve.serveup.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import serve.serveup.R;
@@ -19,7 +18,6 @@ public class MainPanel extends AppCompatActivity {
         Bundle getUserInfo = getIntent().getExtras();
         UserInfo userInfo = (UserInfo)getUserInfo.getSerializable("userInfo");
 
-        Log.d("neki", userInfo.getEmail());
         TextView email = findViewById(R.id.email);
         TextView name = findViewById(R.id.name);
         TextView uid = findViewById(R.id.uid);
@@ -27,6 +25,8 @@ public class MainPanel extends AppCompatActivity {
         email.setText(email.getText().toString() + " " + userInfo.getEmail());
         name.setText(name.getText().toString() + " " + userInfo.getDisplayName());
         uid.setText(uid.getText().toString() + " " + userInfo.getuID());
+
+
 
     }
 }
