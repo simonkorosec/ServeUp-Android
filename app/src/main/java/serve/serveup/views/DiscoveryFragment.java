@@ -12,7 +12,7 @@ import serve.serveup.R;
 
 
 
-public class RegistrationFragment extends Fragment {
+public class DiscoveryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,21 +24,14 @@ public class RegistrationFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public RegistrationFragment() {
+    public DiscoveryFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RegistrationFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static RegistrationFragment newInstance(String param1, String param2) {
-        RegistrationFragment fragment = new RegistrationFragment();
+    public static DiscoveryFragment newInstance(String param1, String param2) {
+        DiscoveryFragment fragment = new DiscoveryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,7 +52,7 @@ public class RegistrationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registration, container, false);
+        return inflater.inflate(R.layout.fragment_discovery, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

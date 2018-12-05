@@ -97,8 +97,8 @@
     </android.support.v7.widget.CardView>
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/google_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 

@@ -1,23 +1,46 @@
 package serve.serveup.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+
 import serve.serveup.R;
+import serve.serveup.dataholder.UserInfo;
+import serve.serveup.utils.GoogleSignInUtil;
 import serve.serveup.utils.Utils;
 
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static int RC_SIGN_IN = 100;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private SignInButton googleButton;
+    private View signInButton;
+    private View signUp;
+    private GoogleSignInUtil myGoogleUtil;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -40,24 +63,53 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d("myLayout", currentUser + " object");
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        View googleButton = getActivity().findViewById(R.id.sign_in_button);
-        googleButton.setOnClickListener(this);
-        View signInButton = getActivity().findViewById(R.id.cardView_signin);
-        signInButton.setOnClickListener(this);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
+
+        View myLayout = inflater.inflate(R.layout.fragment_login, container, false);
+        signUp = myLayout.findViewById(R.id.textSignUp);
+        googleButton = myLayout.findViewById(R.id.google_button);
+        signInButton = myLayout.findViewById(R.id.button_sign_in);
+
+        myGoogleUtil = new GoogleSignInUtil(getContext(), mAuth);
+        myGoogleUtil.setUp();
+
+
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Google sign out
+                if (myGoogleUtil.checkIfAlreadySignedIn())
+                    myGoogleUtil.signOut();
+            }
+        });
+
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleSignIn();
+            }
+        });
+
+
+        return myLayout;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -83,33 +135,54 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.cardView_signin:
-                checkValidation();
-                break;
-            case R.id.sign_in_button:
-                googleSignIn();
-                break;
-        }
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Utils.showToast(getActivity(), "Google authentication failed :(");
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Bundle myBundle = new Bundle();
+                            UserInfo myUserInfo = myGoogleUtil.getUserInfo();
+                            myBundle.putSerializable("userInfo", myUserInfo);
+
+                            Intent startMainPanel = new Intent(getActivity(), MainPanel.class);
+                            startMainPanel.putExtras(myBundle);
+                            startActivity(startMainPanel);
+                            Utils.showToast(getActivity(), "Signed in!");
+                        }
+                        else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("myLayout", "signInWithCredential:failure", task.getException());
+                        }
+
+                    }
+                });
+    }
 
     private void checkValidation() {
         EditText password = getActivity().findViewById(R.id.passwordField);
@@ -123,15 +196,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void googleSignIn() {
-        Utils.showToast(getContext(), "Not yet implemented");
-        /*GoogleSignInUtil myGoogleUtil = new GoogleSignInUtil(getContext());
-        myGoogleUtil.setUp();
-        GoogleSignInClient mGoogleSignInClient = myGoogleUtil.mGoogleSignInClient;
-
-        int RC_SIGN_IN = 100;
-
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        Intent signInIntent = myGoogleUtil.mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        */
     }
+
+    private void signUp() {
+        View loginContainer = getActivity().findViewById(R.id.login_container);
+        loginContainer.setVisibility(View.INVISIBLE);
+        RegistrationFragment nextFrag = new RegistrationFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, nextFrag)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 }
