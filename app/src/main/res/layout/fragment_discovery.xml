@@ -9,16 +9,31 @@
     tools:context=".views.DiscoveryFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
+    <!-- TODO: Pretty sure this is redundant
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/bottom_navigation"
+        android:layout_height="match_parent"
         android:background="#C1C1C1"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UnknownId"></View>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnknownId">
+
+    </View>
+    -->
+    <!--
+    TODO Style the RecyclerView
+    TODO Implement some sort of a view holder, so that the recycler view can be bound to a menu button
+    -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/discoveryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#c1c1c1"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigationView2"
@@ -31,6 +46,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -43,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
