@@ -15,14 +15,13 @@ import serve.serveup.dataholder.UserID;
 import serve.serveup.webservices.RestManagement;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,
-        RegistrationFragment.OnFragmentInteractionListener, DiscoveryFragment.OnFragmentInteractionListener {
+        RegistrationFragment.OnFragmentInteractionListener{
 
-    DiscoveryFragment discoveryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
+
         setContentView(R.layout.fragment_login);
 
         LoginFragment myLoginFrag = new LoginFragment();
@@ -41,16 +40,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             public void onFailure(Call<List<UserID>> call, Throwable t) {
 
             }
-        });*/
-
-        // TODO Proper fragment switching, for now just uncomment the fragment you want to appear
-
-        setContentView(R.layout.fragment_discovery);
-
-        DiscoveryFragment discoveryFragment = new DiscoveryFragment();
-
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.frameLayout, discoveryFragment).commit();
+        });
     }
 
     @Override

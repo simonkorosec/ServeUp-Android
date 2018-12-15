@@ -170,7 +170,7 @@ public class LoginFragment extends Fragment  {
                             UserInfo myUserInfo = myGoogleUtil.getUserInfo();
                             myBundle.putSerializable("userInfo", myUserInfo);
 
-                            Intent startMainPanel = new Intent(getActivity(), MainPanel.class);
+                            Intent startMainPanel = new Intent(getActivity(), NavigationPanelActivity.class);
                             startMainPanel.putExtras(myBundle);
                             startActivity(startMainPanel);
                             Utils.showToast(getActivity(), "Signed in!");

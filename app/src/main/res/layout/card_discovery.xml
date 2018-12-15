@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardDiscovery"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+<LinearLayout android:id="@+id/cardDiscovery"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
-    <!--
-    TODO Style the card
-    TODO It might be a good idea to change the global style instead of applying the colors locally (if that's possible)
-    -->
     <android.support.v7.widget.CardView
         android:id="@+id/cardDiscoveryView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/cardDiscoveryImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_margin="7dp"
+                android:background="@drawable/image_cardview_drawable"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
+                app:srcCompat="@drawable/ic_launcher_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/cardDiscoveryTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/cardDiscoveryImage"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Restaurant Title" />
+                tools:text="Restaurant Title"/>
 
             <TextView
                 android:id="@+id/cardDiscoveryType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/textColor"
                 app:layout_constraintStart_toEndOf="@+id/cardDiscoveryImage"
                 app:layout_constraintTop_toBottomOf="@+id/cardDiscoveryTitle"
-                tools:text="Type" />
+                tools:text="Type"/>
 
             <RatingBar
-                style="?android:attr/ratingBarStyleSmall"
                 android:id="@+id/cardDiscoveryRating"
+                style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toEndOf="@+id/cardDiscoveryImage"
-                app:layout_constraintTop_toBottomOf="@+id/cardDiscoveryType" />
+                app:layout_constraintTop_toBottomOf="@+id/cardDiscoveryType"/>
 
         </android.support.constraint.ConstraintLayout>
 

@@ -3,7 +3,6 @@ package serve.serveup.utils;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,9 +82,8 @@ public class DiscoveryRecyclerAdapter
         holder.cardDiscoveryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Determine what happens on click
-                Log.e(TAG,"Restaurant ID: " + String.valueOf(holder.restaurantID));
-                Log.e(TAG, "Position: " + String.valueOf(holder.getAdapterPosition()));
+                Utils.logInfo("Restaurant ID: " + String.valueOf(holder.restaurantID));
+                Utils.logInfo("Position: " + String.valueOf(holder.getAdapterPosition()));
             }
         });
     }

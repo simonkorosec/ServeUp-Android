@@ -6,6 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
     </style>
 
-</resources>
+    <!-- Navigation panel theme -->
+    <style name="NavigationPanelTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:editTextColor">#295055</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorPrimary">#295055</item>
+        <item name="android:textColorSecondary">#295055</item>
+
+    </style>
+
+
+    </resources>

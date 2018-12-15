@@ -7,7 +7,6 @@ public class RestaurantHome {
     private String name;
     private String type;
     private float rating;
-    // TODO figure out the appropriate way to store the image based on the API call
     private Bitmap image;
 
     // Constructor
