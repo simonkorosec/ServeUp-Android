@@ -8,5 +8,9 @@
     <color name="colorLightGrey">#ebebeb</color>
     <color name="colorDarkGrey">#c1c1c1</color>
     <color name="signup_textfield_hint">#747474</color>
+    <color name="search_bar_color">#D6D6D6</color>
+    <color name="textColor">#dd484848</color>
+    <color name="searchIconColor">#a3a3a3</color>
 
 </resources>
+

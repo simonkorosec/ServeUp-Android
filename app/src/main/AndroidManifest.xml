@@ -2,7 +2,7 @@
 <manifest package="serve.serveup"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".views.MainPanel">
+        <activity
+            android:theme="@style/NavigationPanelTheme"
+            android:name=".views.NavigationPanelActivity"
+            android:label="@string/title_activity_navigation_panel">
         </activity>
     </application>
 

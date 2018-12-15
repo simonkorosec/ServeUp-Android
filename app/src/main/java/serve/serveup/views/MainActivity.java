@@ -15,11 +15,13 @@ import serve.serveup.dataholder.UserID;
 import serve.serveup.webservices.RestManagement;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,
-        RegistrationFragment.OnFragmentInteractionListener {
+        RegistrationFragment.OnFragmentInteractionListener{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.fragment_login);
 
         LoginFragment myLoginFrag = new LoginFragment();
@@ -39,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
             }
         });
-
     }
 
     @Override

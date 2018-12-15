@@ -147,17 +147,16 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="226dp"
-            android:layout_marginLeft="226dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginRight="80dp"
             android:text="@string/forgot_password"
             android:textColor="@color/colorDarkGrey"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            />
 
         <Button
             android:id="@+id/button_sign_in"
@@ -166,17 +165,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="162dp"
-            android:layout_marginLeft="161dp"
-            android:layout_marginRight="162dp"
             android:layout_marginStart="161dp"
             android:layout_marginTop="8dp"
             android:background="@color/colorAccent"
             android:text="@string/sign_in"
             app:layout_constraintBottom_toTopOf="@+id/textSignUp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.39"/>
+            app:layout_constraintVertical_bias="0.483"/>
 
     </android.support.constraint.ConstraintLayout >
 
