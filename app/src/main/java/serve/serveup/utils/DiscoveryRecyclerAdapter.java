@@ -15,11 +15,11 @@ import java.util.List;
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantHome;
 
-// Prototype: public class AdapterName- extends RecyclerView.Adapter<AdapterName.ViewHolderName> {
 public class DiscoveryRecyclerAdapter
         extends RecyclerView.Adapter<DiscoveryRecyclerAdapter.DiscoveryRecyclerHolder> {
 
-    private static final String TAG = "Discovery Card";
+    // Contains the data from which the adapter will build the cards
+    private List<RestaurantHome> restaurantHomes;
 
     // Define the View Holder
     static class DiscoveryRecyclerHolder extends RecyclerView.ViewHolder {
@@ -34,7 +34,6 @@ public class DiscoveryRecyclerAdapter
 
         DiscoveryRecyclerHolder(final View itemView) {
             super(itemView);
-
             // Initialize the parameters based on the Card layout names
             cardDiscoveryView = itemView.findViewById(R.id.cardDiscoveryView);
             cardDiscoveryImage = itemView.findViewById(R.id.cardDiscoveryImage);
@@ -44,14 +43,10 @@ public class DiscoveryRecyclerAdapter
         }
     }
 
-    // Contains the data from which the adapter will build the cards
-    private List<RestaurantHome> restaurantHomes;
-
     // Adapter constructor
     public DiscoveryRecyclerAdapter(List<RestaurantHome> restaurantHomes) {
         this.restaurantHomes = restaurantHomes;
     }
-
     /*
     onCreateViewHolder, onBindViewHolder and getItemCount() HAVE to be defined in order to get rid
     of the errors!
@@ -78,6 +73,7 @@ public class DiscoveryRecyclerAdapter
         holder.cardDiscoveryTitle.setText(restaurantHome.getName());
         holder.cardDiscoveryType.setText(restaurantHome.getType());
         holder.cardDiscoveryRating.setRating(restaurantHome.getRating());
+        holder.cardDiscoveryImage.setImageBitmap(restaurantHome.getImage());
 
         holder.cardDiscoveryView.setOnClickListener(new View.OnClickListener() {
             @Override

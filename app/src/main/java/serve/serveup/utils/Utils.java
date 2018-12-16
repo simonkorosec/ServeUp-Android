@@ -1,9 +1,19 @@
 package serve.serveup.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import serve.serveup.R;
 
 
 /**
@@ -56,4 +66,45 @@ public class Utils {
     public static void logInfo(String text) {
         Log.d("serveup_test", text);
     }
+
+
+    public static Bitmap parseBitmapFromBase64(Context myContext, String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        Bitmap rawBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return Bitmap.createScaledBitmap(rawBitmap,
+                (int) myContext.getResources().getDimension(R.dimen.cardview_restaurant_image_width),
+                (int) myContext.getResources().getDimension(R.dimen.cardview_restaurant_image_height), false);
+    }
+
+
+
+    public static ArrayList<String> readFromFile(String fileName, Context context) {
+        InputStream fIn = null;
+        InputStreamReader isr = null;
+        BufferedReader input = null;
+        ArrayList<String> myStrings = new ArrayList<>();
+        try {
+            fIn = context.getResources().getAssets().open(fileName, Context.MODE_WORLD_READABLE);
+            isr = new InputStreamReader(fIn);
+            input = new BufferedReader(isr);
+            String line = "";
+            while ((line = input.readLine()) != null) {
+                if(line.length() > 0 && !line.contains("NEXT_STRING"))
+                    myStrings.add(line);
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            try {
+                if (isr != null) isr.close();
+                if (fIn != null) fIn.close();
+                if (input != null) input.close();
+            } catch (Exception e2) {
+                e2.getMessage();
+            }
+        }
+        return myStrings;
+    }
+
+
 }

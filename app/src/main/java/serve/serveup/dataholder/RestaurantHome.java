@@ -9,7 +9,6 @@ public class RestaurantHome {
     private float rating;
     private Bitmap image;
 
-    // Constructor
     public RestaurantHome(int id, String name, String type, float rating, Bitmap image) {
         this.id = id;
         this.name = name;

@@ -1,9 +1,6 @@
 package serve.serveup.views.navigation;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,16 +15,9 @@ import java.util.ArrayList;
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantHome;
 import serve.serveup.utils.DiscoveryRecyclerAdapter;
+import serve.serveup.utils.Utils;
 
 public class HomeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
     RecyclerView discoveryRecyclerView;
@@ -40,41 +30,34 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        // TODO Proper initialization of the restaurantHomes object
-        restaurantHomes = new ArrayList<>();
-        // TODO get the data from the API instead of hardcoding
-        Bitmap image = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.common_google_signin_btn_icon_dark);
-        for (int i = 0; i < 20; i++) {
-            restaurantHomes.add(new RestaurantHome(i,"Foculus", "Picerija", 4.5f, image));
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         restaurantHomes = new ArrayList<>();
-        // TODO get the data from the API instead of hardcoding
-        Bitmap image = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.common_google_signin_btn_icon_dark);
-        for (int i = 0; i < 20; i++) {
-            restaurantHomes.add(new RestaurantHome(i,"Foculus", "Picerija", 4.5f, image));
+
+
+        /* TODO important! here adde the api call that gets all the restaurants and their info
+           TODO then implement function that saves base64 image strings into file "base64String.txt" in /assets root folder
+           TODO once saved into file, split and parse the base64 strings back into array list
+           TODO and pass it into parseBitmapFromBase64 function.
+
+           TODO implement further ordering worklow, when user clicks on a restaurant.
+        * */
+
+        ArrayList<String> base64Strings = Utils.readFromFile("base64Strings.txt", getContext());
+
+
+        for (int i = 0; i < 5; i++) {
+            restaurantHomes.add(new RestaurantHome(i,"Foculus", "Picerija", 4.5f,
+                    Utils.parseBitmapFromBase64(getContext(), base64Strings.get(i))));
         }
+
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -116,7 +99,7 @@ public class HomeFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

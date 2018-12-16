@@ -31,10 +31,6 @@ import serve.serveup.utils.Utils;
 
 
 public class LoginFragment extends Fragment  {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static int RC_SIGN_IN = 100;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private SignInButton googleButton;
@@ -52,15 +48,6 @@ public class LoginFragment extends Fragment  {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onResume() {
@@ -72,10 +59,6 @@ public class LoginFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -89,7 +72,6 @@ public class LoginFragment extends Fragment  {
 
         myGoogleUtil = new GoogleSignInUtil(getContext(), mAuth);
         myGoogleUtil.setUp();
-
 
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +94,6 @@ public class LoginFragment extends Fragment  {
         return myLayout;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
