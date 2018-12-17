@@ -1,6 +1,10 @@
 package serve.serveup.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -18,6 +24,7 @@ public class UserRecyclerAdapter
         extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerHolder> {
 
     private List<ProfileOption> userOptions;
+    private Context myContext;
 
     /* TODO implement user profile functionalities for use profile
     *  TODO info about email, account info, settings, log out option
@@ -37,8 +44,9 @@ public class UserRecyclerAdapter
         }
     }
 
-    public UserRecyclerAdapter(List<ProfileOption> userOptions) {
+    public UserRecyclerAdapter(Context myContext, List<ProfileOption> userOptions) {
         this.userOptions = userOptions;
+        this.myContext = myContext;
     }
 
     @NonNull
@@ -53,6 +61,10 @@ public class UserRecyclerAdapter
     public void onBindViewHolder(@NonNull final UserRecyclerHolder holder, int position) {
         ProfileOption profileOption = this.userOptions.get(position);
         holder.cardDiscoveryTitle.setText(profileOption.getOptionTitle());
+        Drawable myIcon = profileOption.getIcon();
+
+        Context myCnx = holder.cardDiscoveryImage.getContext();
+        DrawableCompat.setTint(myIcon, myCnx.getResources().getColor(R.color.colorAccent));
         holder.cardDiscoveryImage.setImageDrawable(profileOption.getIcon());
 
         holder.cardUserOptionView.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +92,9 @@ public class UserRecyclerAdapter
 
 
     private void logOut() {
-        // log out from the app
+        Utils.logInfo("current user: " + FirebaseAuth.getInstance().getCurrentUser());
+        FirebaseAuth.getInstance().signOut();
+        ((Activity)this.myContext).finish();
     }
 
 }

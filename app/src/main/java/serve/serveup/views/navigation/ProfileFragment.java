@@ -31,9 +31,11 @@ public class ProfileFragment extends Fragment {
     * */
 
     private OnFragmentInteractionListener mListener;
-    RecyclerView userOptionRecyclerView;
-    UserRecyclerAdapter userOptionRecyclerAdapter;
-    LinearLayoutManager linearLayoutManager;
+    private RecyclerView userOptionRecyclerView;
+    private UserRecyclerAdapter userOptionRecyclerAdapter;
+    private LinearLayoutManager linearLayoutManager;
+
+    private String userEmail;
 
     // Contains data of every user option
     ArrayList<ProfileOption> userOptionsData;
@@ -61,21 +63,20 @@ public class ProfileFragment extends Fragment {
         ImageView image = myContainer.findViewById(R.id.userPhoto);
         TextView displayName = myContainer.findViewById(R.id.displayName);
 
+        userEmail = userInfo.getEmail();
         displayName.setText(userInfo.getDisplayName());
         Picasso.get().load(photoUrl).transform(new CircleTransformation()).into(image);
 
 
         fillUpUserOptions();
 
-
         userOptionRecyclerView = myContainer.findViewById(R.id.userOptions);
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        userOptionRecyclerAdapter = new UserRecyclerAdapter(userOptionsData);
+        userOptionRecyclerAdapter = new UserRecyclerAdapter(getActivity(), userOptionsData);
 
         // Set the layout manager and the adapter of the Recycler View
         userOptionRecyclerView.setLayoutManager(linearLayoutManager);
         userOptionRecyclerView.setAdapter(userOptionRecyclerAdapter);
-
 
 
 
@@ -110,7 +111,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void fillUpUserOptions() {
-        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_email_24px), "Email"));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_email_24px), userEmail));
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_account_set_up), "Account info"));
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_settings_20px), "Settings"));
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_sign_out_icon), "Log out"));

@@ -11,25 +11,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantHome;
+import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.utils.DiscoveryRecyclerAdapter;
 import serve.serveup.utils.Utils;
+import serve.serveup.webservices.RestManagement;
 
 public class HomeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    RecyclerView discoveryRecyclerView;
-    DiscoveryRecyclerAdapter discoveryRecyclerAdapter;
-    LinearLayoutManager linearLayoutManager;
+    private RecyclerView discoveryRecyclerView;
+    private DiscoveryRecyclerAdapter discoveryRecyclerAdapter;
+    private LinearLayoutManager linearLayoutManager;
 
-    ArrayList<RestaurantHome> restaurantHomes; // Contains data of every restaurant home page info
+    // Contains data of every restaurant home page info
+    ArrayList<RestaurantHome> restaurantHomes;
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,42 +45,49 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         restaurantHomes = new ArrayList<>();
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-
-        /* TODO important! here adde the api call that gets all the restaurants and their info
-           TODO then implement function that saves base64 image strings into file "base64String.txt" in /assets root folder
-           TODO once saved into file, split and parse the base64 strings back into array list
-           TODO and pass it into parseBitmapFromBase64 function.
-
-           TODO implement further ordering worklow, when user clicks on a restaurant.
+        /*
+         TODO hardcoded refrence to LOCATION, need to change it on the current location of the device
         * */
+        RestManagement.getAllRestaurants("Ljubljana").enqueue(new Callback<List<RestaurantInfo>>() {
+            @Override
+            public void onResponse(Call<List<RestaurantInfo>> call, Response<List<RestaurantInfo>> response) {
 
-        ArrayList<String> base64Strings = Utils.readFromFile("base64Strings.txt", getContext());
+                List<RestaurantInfo> myRests = response.body();
 
+                if(getActivity() != null) {
+                    for (RestaurantInfo myRest : myRests) {
+                        Utils.logInfo(myRest.toString());
+                        restaurantHomes.add(new RestaurantHome(
+                                myRest.getIdRestavracija(),
+                                myRest.getImeRestavracije(),
+                                myRest.getTip(),
+                                myRest.getOcena(),
+                                Utils.parseBitmapFromBase64(getActivity(), myRest.getSlika())));
+                    }
+                }
+                // Initialize the view components
+                discoveryRecyclerView = rootView.findViewById(R.id.discoveryRecyclerView);
+                linearLayoutManager = new LinearLayoutManager(getActivity());
+                discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(restaurantHomes);
 
-        for (int i = 0; i < 5; i++) {
-            restaurantHomes.add(new RestaurantHome(i,"Foculus", "Picerija", 4.5f,
-                    Utils.parseBitmapFromBase64(getContext(), base64Strings.get(i))));
-        }
+                // Set the layout manager and the adapter of the Recycler View
+                discoveryRecyclerView.setLayoutManager(linearLayoutManager);
+                discoveryRecyclerView.setAdapter(discoveryRecyclerAdapter);
+            }
 
-
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        // Initialize the view components
-        discoveryRecyclerView = rootView.findViewById(R.id.discoveryRecyclerView);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        discoveryRecyclerAdapter = new DiscoveryRecyclerAdapter(restaurantHomes);
-
-        // Set the layout manager and the adapter of the Recycler View
-        discoveryRecyclerView.setLayoutManager(linearLayoutManager);
-        discoveryRecyclerView.setAdapter(discoveryRecyclerAdapter);
+            @Override
+            public void onFailure(Call<List<RestaurantInfo>> call, Throwable t) {
+                Utils.logInfo("API call 'restaurant/home/' failed!");
+            }
+        });
 
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

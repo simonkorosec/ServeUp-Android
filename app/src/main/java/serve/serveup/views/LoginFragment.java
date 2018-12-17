@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +37,6 @@ public class LoginFragment extends Fragment  {
     private View signUp;
     private GoogleSignInUtil myGoogleUtil;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,12 +44,23 @@ public class LoginFragment extends Fragment  {
         // Required empty public constructor
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Log.d("myLayout", currentUser + " object");
+        Utils.logInfo("GOOGLE SIGN IN CLIENT: " + myGoogleUtil.checkIfAlreadySignedIn());
+        Utils.logInfo("START current user: " + currentUser);
+        if(currentUser == null && myGoogleUtil.checkIfAlreadySignedIn()) {
+            myGoogleUtil.signOut();
+        }
+        else if (currentUser != null && myGoogleUtil.checkIfAlreadySignedIn()) {
+            automaticSingIn();
+        }
     }
 
     @Override
@@ -73,24 +80,12 @@ public class LoginFragment extends Fragment  {
         myGoogleUtil = new GoogleSignInUtil(getContext(), mAuth);
         myGoogleUtil.setUp();
 
-
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Google sign out
-                if (myGoogleUtil.checkIfAlreadySignedIn())
-                    myGoogleUtil.signOut();
-            }
-        });
-
         googleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 googleSignIn();
             }
         });
-
-
         return myLayout;
     }
 
@@ -118,7 +113,6 @@ public class LoginFragment extends Fragment  {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -146,19 +140,11 @@ public class LoginFragment extends Fragment  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Bundle myBundle = new Bundle();
-                            UserInfo myUserInfo = myGoogleUtil.getUserInfo();
-                            myBundle.putSerializable("userInfo", myUserInfo);
-
-                            Intent startMainPanel = new Intent(getActivity(), NavigationPanelActivity.class);
-                            startMainPanel.putExtras(myBundle);
-                            startActivity(startMainPanel);
-                            Utils.showToast(getActivity(), "Signed in!");
+                            automaticSingIn();
                         }
                         else {
                             // If sign in fails, display a message to the user.
-                            Log.w("myLayout", "signInWithCredential:failure", task.getException());
+                            Utils.logInfo("Sing in failed!");
                         }
 
                     }
@@ -181,6 +167,7 @@ public class LoginFragment extends Fragment  {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    // not being used
     private void signUp() {
         View loginContainer = getActivity().findViewById(R.id.login_container);
         loginContainer.setVisibility(View.INVISIBLE);
@@ -189,6 +176,17 @@ public class LoginFragment extends Fragment  {
                 .replace(R.id.fragment_container, nextFrag)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void automaticSingIn() {
+        Bundle myBundle = new Bundle();
+        UserInfo myUserInfo = myGoogleUtil.getUserInfo();
+        myBundle.putSerializable("userInfo", myUserInfo);
+
+        Intent startMainPanel = new Intent(getActivity(), NavigationPanelActivity.class);
+        startMainPanel.putExtras(myBundle);
+        startActivity(startMainPanel);
+        Utils.showToast(getActivity(), "Signed in!");
     }
 
 
