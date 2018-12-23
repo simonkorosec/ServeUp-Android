@@ -36,9 +36,8 @@ public class LoginFragment extends Fragment  {
     private View signInButton;
     private View signUp;
     private GoogleSignInUtil myGoogleUtil;
-
-
     private OnFragmentInteractionListener mListener;
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -55,12 +54,10 @@ public class LoginFragment extends Fragment  {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Utils.logInfo("GOOGLE SIGN IN CLIENT: " + myGoogleUtil.checkIfAlreadySignedIn());
         Utils.logInfo("START current user: " + currentUser);
-        if(currentUser == null && myGoogleUtil.checkIfAlreadySignedIn()) {
+        if(currentUser == null && myGoogleUtil.checkIfAlreadySignedIn())
             myGoogleUtil.signOut();
-        }
-        else if (currentUser != null && myGoogleUtil.checkIfAlreadySignedIn()) {
+        else if (currentUser != null && myGoogleUtil.checkIfAlreadySignedIn())
             automaticSingIn();
-        }
     }
 
     @Override
@@ -186,7 +183,7 @@ public class LoginFragment extends Fragment  {
         Intent startMainPanel = new Intent(getActivity(), NavigationPanelActivity.class);
         startMainPanel.putExtras(myBundle);
         startActivity(startMainPanel);
-        Utils.showToast(getActivity(), "Signed in!");
+        //Utils.showToast(getActivity(), "Signed in!");
     }
 
 

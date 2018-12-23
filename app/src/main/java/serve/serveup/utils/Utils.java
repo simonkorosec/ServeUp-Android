@@ -3,6 +3,7 @@ package serve.serveup.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
@@ -68,12 +69,13 @@ public class Utils {
     }
 
 
-    public static Bitmap parseBitmapFromBase64(Context myContext, String base64String) {
+    public static Bitmap parseBitmapFromBase64(@NonNull Context myContext, String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
         Bitmap rawBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return Bitmap.createScaledBitmap(rawBitmap,
                 (int) myContext.getResources().getDimension(R.dimen.cardview_restaurant_image_width),
-                (int) myContext.getResources().getDimension(R.dimen.cardview_restaurant_image_height), false);
+                (int) myContext.getResources().getDimension(R.dimen.cardview_restaurant_image_height),
+                false);
     }
 
 

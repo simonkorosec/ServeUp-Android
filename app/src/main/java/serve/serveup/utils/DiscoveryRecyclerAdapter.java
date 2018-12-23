@@ -1,5 +1,9 @@
 package serve.serveup.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +17,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import serve.serveup.R;
-import serve.serveup.dataholder.RestaurantHome;
+import serve.serveup.dataholder.RestaurantInfo;
+import serve.serveup.views.RestaurantActivity;
 
 public class DiscoveryRecyclerAdapter
         extends RecyclerView.Adapter<DiscoveryRecyclerAdapter.DiscoveryRecyclerHolder> {
 
     // Contains the data from which the adapter will build the cards
-    private List<RestaurantHome> restaurantHomes;
+    private List<RestaurantInfo> restaurantsHome;
+    @NonNull
+    private RestaurantInfo currentRestaurant;
 
     // Define the View Holder
     static class DiscoveryRecyclerHolder extends RecyclerView.ViewHolder {
@@ -44,8 +51,8 @@ public class DiscoveryRecyclerAdapter
     }
 
     // Adapter constructor
-    public DiscoveryRecyclerAdapter(List<RestaurantHome> restaurantHomes) {
-        this.restaurantHomes = restaurantHomes;
+    public DiscoveryRecyclerAdapter(List<RestaurantInfo> restaurantsHome) {
+        this.restaurantsHome = restaurantsHome;
     }
     /*
     onCreateViewHolder, onBindViewHolder and getItemCount() HAVE to be defined in order to get rid
@@ -66,33 +73,45 @@ public class DiscoveryRecyclerAdapter
     @Override
     public void onBindViewHolder(@NonNull final DiscoveryRecyclerHolder holder, int position) {
         // Get the restaurant home info for the appropriate restaurant
-        RestaurantHome restaurantHome = this.restaurantHomes.get(position);
+        RestaurantInfo restInfo = this.restaurantsHome.get(position);
+        Context myContext = holder.cardDiscoveryTitle.getContext();
+
         // Set the Holder (card) values based on the values from the data list
-        //holder.cardDiscoveryImage.setImageBitmap(restaurantHome.getImage());
-        holder.restaurantID = restaurantHome.getId();
-        holder.cardDiscoveryTitle.setText(restaurantHome.getName());
-        holder.cardDiscoveryType.setText(restaurantHome.getType());
-        holder.cardDiscoveryRating.setRating(restaurantHome.getRating());
-        holder.cardDiscoveryImage.setImageBitmap(restaurantHome.getImage());
+        holder.restaurantID = restInfo.getIdRestavracija();
+        holder.cardDiscoveryTitle.setText(restInfo.getImeRestavracije());
+        holder.cardDiscoveryType.setText(restInfo.getTip());
+        holder.cardDiscoveryRating.setRating(restInfo.getOcena());
+
+        if (myContext != null) {
+            Bitmap restBitmap = Utils.parseBitmapFromBase64(myContext, restInfo.getSlika());
+            holder.cardDiscoveryImage.setImageBitmap(restBitmap);
+        }
 
         holder.cardDiscoveryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.logInfo("Restaurant ID: " + String.valueOf(holder.restaurantID));
-                Utils.logInfo("Position: " + String.valueOf(holder.getAdapterPosition()));
+                Bundle myBundle = new Bundle();
+                currentRestaurant = restaurantsHome.get(holder.getAdapterPosition());
+                Utils.logInfo("current restaurant position: " + holder.getAdapterPosition());
+                myBundle.putSerializable("restaurant_info", currentRestaurant);
+                if (view.getContext() != null) {
+                    Intent myIntent = new Intent(view.getContext(), RestaurantActivity.class);
+                    myIntent.putExtras(myBundle);
+                    view.getContext().startActivity(myIntent);
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return restaurantHomes.size();
+        return restaurantsHome.size();
     }
 
     // In case the adapter needs to be refreshed. A simple implementation
-    public void refreshAdapter(List<RestaurantHome> restaurantHomesNew) {
-        this.restaurantHomes.clear();
-        this.restaurantHomes.addAll(restaurantHomesNew);
+    public void refreshAdapter(List<RestaurantInfo> RestaurantInfosNew) {
+        this.restaurantsHome.clear();
+        this.restaurantsHome.addAll(RestaurantInfosNew);
         notifyDataSetChanged();
     }
 }

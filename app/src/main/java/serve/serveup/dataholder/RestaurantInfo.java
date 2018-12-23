@@ -3,7 +3,9 @@ package serve.serveup.dataholder;
 import android.support.annotation.NonNull;
 import com.squareup.moshi.Json;
 
-public class RestaurantInfo {
+import java.io.Serializable;
+
+public class RestaurantInfo implements Serializable {
 
     @NonNull
     @Json(name = "ime_restavracije")
@@ -105,7 +107,6 @@ public class RestaurantInfo {
         this.slika = slika;
     }
 
-
     @Override
     public String toString() {
         return "Ime: " + this.getImeRestavracije() + "\n" +
@@ -116,6 +117,6 @@ public class RestaurantInfo {
                 "Hisna stevilka: " + this.getHisnaStevilka() + "\n" +
                 "Postna stevilka: " + this.getPostnaStevilka() + "\n" +
                 "Kraj: " + this.getKraj() + "\n" +
-                "Slika: " +  " BASE 64 STRING whic is too long to output :)" /*this.getSlika()*/ + "\n";
+                "Slika: " +  " BASE 64 STRING which is too long to output :)" /*this.getSlika()*/ + "\n";
     }
 }

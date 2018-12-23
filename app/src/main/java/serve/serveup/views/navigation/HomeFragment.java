@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import serve.serveup.R;
-import serve.serveup.dataholder.RestaurantHome;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.utils.DiscoveryRecyclerAdapter;
 import serve.serveup.utils.Utils;
@@ -29,9 +29,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView discoveryRecyclerView;
     private DiscoveryRecyclerAdapter discoveryRecyclerAdapter;
     private LinearLayoutManager linearLayoutManager;
-
+    private ProgressBar myProgressBar;
     // Contains data of every restaurant home page info
-    ArrayList<RestaurantHome> restaurantHomes;
+    private List<RestaurantInfo> restaurantHomes;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,6 +49,10 @@ public class HomeFragment extends Fragment {
 
         restaurantHomes = new ArrayList<>();
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        myProgressBar = rootView.findViewById(R.id.homeProgressBar);
+        myProgressBar.setVisibility(View.VISIBLE);
+        /*myProgressBar.getIndeterminateDrawable()
+                .setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorDarkGrey), PorterDuff.Mode.SRC_IN );*/
 
         /*
          TODO hardcoded refrence to LOCATION, need to change it on the current location of the device
@@ -57,17 +62,9 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<RestaurantInfo>> call, Response<List<RestaurantInfo>> response) {
 
                 List<RestaurantInfo> myRests = response.body();
-
                 if(getActivity() != null) {
-                    for (RestaurantInfo myRest : myRests) {
-                        Utils.logInfo(myRest.toString());
-                        restaurantHomes.add(new RestaurantHome(
-                                myRest.getIdRestavracija(),
-                                myRest.getImeRestavracije(),
-                                myRest.getTip(),
-                                myRest.getOcena(),
-                                Utils.parseBitmapFromBase64(getActivity(), myRest.getSlika())));
-                    }
+                    restaurantHomes = myRests;
+                    myProgressBar.setVisibility(View.GONE);
                 }
                 // Initialize the view components
                 discoveryRecyclerView = rootView.findViewById(R.id.discoveryRecyclerView);
