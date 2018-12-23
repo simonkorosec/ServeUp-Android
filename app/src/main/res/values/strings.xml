@@ -12,8 +12,17 @@
     <string name="sign_up">Sign up</string>
     <string name="title_activity_navigation_panel">NavigationPanelActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_orders">Orders</string>
+    <string name="title_orders">Orders</string>2
     <string name="title_neki">Neki</string>
     <string name="title_profile">Profile</string>
+
+
+
+    <string name="kosila">Kosila</string>
+    <string name="juhe">Juhe</string>
+    <string name="glavne_jedi">Glavne jedi</string>
+    <string name="solate">Solate</string>
+    <string name="sladice">Sladice</string>
+    <string name="pijace">Pijače</string>
 
 </resources>

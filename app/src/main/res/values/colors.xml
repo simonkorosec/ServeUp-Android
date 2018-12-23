@@ -11,6 +11,9 @@
     <color name="search_bar_color">#D6D6D6</color>
     <color name="textColor">#dd484848</color>
     <color name="searchIconColor">#a3a3a3</color>
+    <color name="backIconColor">#FF545454</color>
+    <color name="transparentGrey">#9bf7f7f7</color>
+    <color name="cardview_border_color">#d1d1d1</color>
 
 </resources>
 

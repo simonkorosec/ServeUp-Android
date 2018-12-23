@@ -61,6 +61,10 @@ public class NavigationPanelActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
     }
 
+    @Override
+    public void onBackPressed() {
+        // do nothing
+    }
 
     private void setFragment(Fragment myFragment) {
         getSupportFragmentManager().beginTransaction().

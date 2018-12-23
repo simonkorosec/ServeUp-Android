@@ -25,12 +25,11 @@
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/cardDiscoveryImage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="@dimen/cardview_restaurant_image_width"
+                android:layout_height="@dimen/cardview_restaurant_image_height"
                 android:layout_margin="7dp"
-                android:background="@drawable/image_cardview_drawable"
+                android:background="@color/textColor"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_launcher_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -38,7 +37,7 @@
             <TextView
                 android:id="@+id/cardDiscoveryTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="21dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/textColor"

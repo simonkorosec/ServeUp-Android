@@ -5,6 +5,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
+import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.dataholder.UserID;
 import serve.serveup.dataholder.UserLoginStatus;
 
@@ -28,6 +29,12 @@ public class RestManagement {
         return myRetrofit
                 .create(GetUsers.class)
                 .getAllUsers();
+    }
+
+    public static Call<List<RestaurantInfo>> getAllRestaurants(String location) {
+        return myRetrofit
+                .create(GetRestaurants.class)
+                .getRestaurantsByCity(location);
     }
 
 

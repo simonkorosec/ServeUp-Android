@@ -1,58 +1,88 @@
 package serve.serveup.views.navigation;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import serve.serveup.R;
+import serve.serveup.dataholder.ProfileOption;
+import serve.serveup.dataholder.UserInfo;
+import serve.serveup.utils.CircleTransformation;
+import serve.serveup.utils.UserRecyclerAdapter;
 
 public class ProfileFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    /*
+    *  TODO  design userOption cards and its click events for further functionality
+    * */
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView userOptionRecyclerView;
+    private UserRecyclerAdapter userOptionRecyclerAdapter;
+    private LinearLayoutManager linearLayoutManager;
+
+    private String userEmail;
+
+    // Contains data of every user option
+    ArrayList<ProfileOption> userOptionsData;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View myContainer =  inflater.inflate(R.layout.fragment_profile, container, false);
+
+        userOptionsData = new ArrayList<>();
+
+        Bundle getUserInfo = getActivity().getIntent().getExtras();
+        UserInfo userInfo = (UserInfo) getUserInfo.getSerializable("userInfo");
+
+        Uri photoUrl = Uri.parse(userInfo.getPhotoUrl());
+        ImageView image = myContainer.findViewById(R.id.userPhoto);
+        TextView displayName = myContainer.findViewById(R.id.displayName);
+
+        userEmail = userInfo.getEmail();
+        displayName.setText(userInfo.getDisplayName());
+        Picasso.get().load(photoUrl).transform(new CircleTransformation()).into(image);
+
+
+        fillUpUserOptions();
+
+        userOptionRecyclerView = myContainer.findViewById(R.id.userOptions);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        userOptionRecyclerAdapter = new UserRecyclerAdapter(getActivity(), userOptionsData);
+
+        // Set the layout manager and the adapter of the Recycler View
+        userOptionRecyclerView.setLayoutManager(linearLayoutManager);
+        userOptionRecyclerView.setAdapter(userOptionRecyclerAdapter);
+
+
+
+        return myContainer;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -80,18 +110,15 @@ public class ProfileFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-      /*
+    private void fillUpUserOptions() {
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_email_24px), userEmail));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_account_set_up), "Account info"));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_settings_20px), "Settings"));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_sign_out_icon), "Log out"));
+    }
 
-        Bundle getUserInfo = getIntent().getExtras();
-        UserInfo userInfo = (UserInfo)getUserInfo.getSerializable("userInfo");
+    private Drawable retDrawable(int resourceID) {
+        return getResources().getDrawable(resourceID);
+    }
 
-        TextView email = findViewById(R.id.email);
-        TextView name = findViewById(R.id.name);
-        TextView uid = findViewById(R.id.uid);
-
-        email.setText(email.getText().toString() + " " + userInfo.getEmail());
-        name.setText(name.getText().toString() + " " + userInfo.getDisplayName());
-        uid.setText(uid.getText().toString() + " " + userInfo.getuID());
-
-     */
 }
