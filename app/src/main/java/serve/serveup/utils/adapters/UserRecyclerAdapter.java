@@ -1,4 +1,4 @@
-package serve.serveup.utils;
+package serve.serveup.utils.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +19,7 @@ import java.util.List;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.ProfileOption;
+import serve.serveup.utils.Utils;
 
 public class UserRecyclerAdapter
         extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerHolder> {

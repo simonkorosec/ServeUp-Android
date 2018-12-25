@@ -68,6 +68,13 @@ public class Utils {
         Log.d("serveup_test", text);
     }
 
+    public static void logMultipleData(Object ... data) {
+        if (data.length > 0) {
+            for (int i = 0; i < data.length; i += 2) {
+                logInfo(data[i] + " : " + data[i + 1]);
+            }
+        }
+    }
 
     public static Bitmap parseBitmapFromBase64(@NonNull Context myContext, String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
@@ -79,7 +86,6 @@ public class Utils {
     }
 
 
-
     public static ArrayList<String> readFromFile(String fileName, Context context) {
         InputStream fIn = null;
         InputStreamReader isr = null;
@@ -89,7 +95,7 @@ public class Utils {
             fIn = context.getResources().getAssets().open(fileName, Context.MODE_WORLD_READABLE);
             isr = new InputStreamReader(fIn);
             input = new BufferedReader(isr);
-            String line = "";
+            String line;
             while ((line = input.readLine()) != null) {
                 if(line.length() > 0 && !line.contains("NEXT_STRING"))
                     myStrings.add(line);

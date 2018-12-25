@@ -21,7 +21,7 @@ import serve.serveup.R;
 import serve.serveup.dataholder.ProfileOption;
 import serve.serveup.dataholder.UserInfo;
 import serve.serveup.utils.CircleTransformation;
-import serve.serveup.utils.UserRecyclerAdapter;
+import serve.serveup.utils.adapters.UserRecyclerAdapter;
 
 public class ProfileFragment extends Fragment {
 

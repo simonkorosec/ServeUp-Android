@@ -12,9 +12,9 @@ import com.google.gson.Gson;
 
 public class ContentStore {
 
-    public static String prefsName = "myprefrences";
-    public static SharedPreferences myPrefs;
-    public static SharedPreferences.Editor myEditor;
+    private static String prefsName = "myprefrences";
+    private static SharedPreferences myPrefs;
+    private static SharedPreferences.Editor myEditor;
     private static Gson myGson = new Gson();
 
 
@@ -36,7 +36,7 @@ public class ContentStore {
             myEditor.putBoolean(key, (boolean)value);
         }
         else {
-            String json = myGson.toJson((GoogleSignInUtil)value);
+            String json = myGson.toJson(value);
             myEditor.putString(key, json);
         }
         myEditor.commit();

@@ -17,12 +17,14 @@
     <string name="title_profile">Profile</string>
 
 
-
     <string name="kosila">Kosila</string>
     <string name="juhe">Juhe</string>
     <string name="glavne_jedi">Glavne jedi</string>
     <string name="solate">Solate</string>
     <string name="sladice">Sladice</string>
     <string name="pijace">Pijače</string>
+
+    <!-- messages -->
+    <string name="meals_empty_category_message">Restavracija nima izbranih jedi v kategoriji \'%s\'</string>
 
 </resources>

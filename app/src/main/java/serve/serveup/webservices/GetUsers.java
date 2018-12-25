@@ -8,7 +8,7 @@ import serve.serveup.dataholder.UserID;
 
 public interface GetUsers {
 
-    // get all the user token ids in a list
+    // get all the user token IDs in a list
     @GET("user/")
     Call<List<UserID>> getAllUsers();
 }

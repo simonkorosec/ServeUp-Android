@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import serve.serveup.R;
+import serve.serveup.views.login.LoginFragment;
+import serve.serveup.views.login.RegistrationFragment;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,
         RegistrationFragment.OnFragmentInteractionListener{
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, myLoginFrag).commit();
+
+
     }
 
     @Override
