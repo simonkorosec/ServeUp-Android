@@ -1,5 +1,6 @@
 package serve.serveup.utils.adapters;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +13,15 @@ import java.util.ArrayList;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.MealInfo;
+import serve.serveup.dataholder.RestaurantInfo;
+import serve.serveup.utils.Utils;
+import serve.serveup.views.restaurant.PickedMealActivity;
 
 public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsHolder> {
 
     private ArrayList<MealInfo> meals;
+    private MealInfo pickedMeal;
+    private RestaurantInfo pickedRestaurant;
 
     // Define the View Holder
     static class MealsHolder extends RecyclerView.ViewHolder {
@@ -34,8 +40,9 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsHolder>
         }
     }
 
-    public MealsAdapter(ArrayList<MealInfo> meals) {
+    public MealsAdapter(ArrayList<MealInfo> meals, RestaurantInfo pickedRestaurant) {
         this.meals = meals;
+        this.pickedRestaurant = pickedRestaurant;
     }
 
     @NonNull
@@ -57,7 +64,16 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsHolder>
         holder.cardMealContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // empty
+                pickedMeal = meals.get(holder.getAdapterPosition());
+                if (pickedMeal != null) {
+                    Intent myIntent = new Intent(view.getContext(), PickedMealActivity.class);
+                    myIntent.putExtra("picked_meal", pickedMeal);
+                    myIntent.putExtra("picked_restaurant", pickedRestaurant);
+                    view.getContext().startActivity(myIntent);
+                    //((Activity) view.getContext()).finish();
+                }
+                else
+                    Utils.logInfo("Picked meal doesnt exist");
             }
         });
     }

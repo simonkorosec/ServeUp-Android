@@ -54,7 +54,7 @@ public class CategoryMealsActivity extends AppCompatActivity {
 
         // Initialize the view components
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mealsAdapter = new MealsAdapter((ArrayList<MealInfo>) categoryMeals);
+        mealsAdapter = new MealsAdapter((ArrayList<MealInfo>) categoryMeals, pickedRestaurant);
         // Set the layout manager and the adapter of the Recycler View
         mealsRecyclerView.setLayoutManager(linearLayoutManager);
         mealsRecyclerView.setAdapter(mealsAdapter);

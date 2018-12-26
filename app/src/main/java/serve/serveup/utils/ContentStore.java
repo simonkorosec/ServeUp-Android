@@ -1,33 +1,35 @@
 package serve.serveup.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
-/**
- * Created by Urban on 8. 12. 2017.
- */
+import serve.serveup.dataholder.MealInfo;
+import serve.serveup.dataholder.RestaurantInfo;
+import serve.serveup.dataholder.session.Session;
+import serve.serveup.dataholder.session.SessionContent;
+import serve.serveup.dataholder.session.SessionManager;
 
-public class ContentStore {
+/*
+    @author: urban.jagodic
+*/
+public class ContentStore implements SessionManager {
 
-    private static String prefsName = "myprefrences";
-    private static SharedPreferences myPrefs;
-    private static SharedPreferences.Editor myEditor;
-    private static Gson myGson = new Gson();
+    private String prefsName = "myprefrences";
+    private String sessionKey = "session_key";
+    private String sessionDefault = "default_session_value";
+    private SharedPreferences myPrefs;
+    private SharedPreferences.Editor myEditor;
+    private Gson myGson = new Gson();
 
 
-    public static void initialize(Activity myActivity) {
-        myPrefs = myActivity.getApplicationContext().getSharedPreferences(prefsName, Context.MODE_PRIVATE);
-        myEditor = myPrefs.edit();
+    public ContentStore(Context context) {
+        this.myPrefs = context.getSharedPreferences(prefsName, Context.MODE_PRIVATE);
+        this.myEditor = myPrefs.edit();
     }
 
-    public static SharedPreferences getMyPrefrences() {
-        return myPrefs;
-    }
-
-    public static void storeData(Object value, String key) {
+    private void storeData(Object value, String key) {
         if (value instanceof Integer) {
             myEditor.putInt(key, (int) value);
         } else if (value instanceof String) {
@@ -42,19 +44,71 @@ public class ContentStore {
         myEditor.commit();
     }
 
-    public static void removeValue(String key) {
+    private void removeValue(String key) {
         myEditor.remove(key);
         myEditor.commit();
     }
 
-    public static Object retrieveFromGson(String key) {
-        String json = myPrefs.getString(key, "default_value");
-        return myGson.fromJson(json, Object.class);
-    }
-
-
-    public static void clearData() {
+    private void clearData() {
         myEditor.clear();
         myEditor.commit();
     }
+
+    // Session methods
+
+    @Override
+    public void addToSession(SessionContent type, Object data) {
+        Session currentSesh = new Session();
+        if(getSession() != null)
+            currentSesh = getSession();
+
+        switch (type) {
+            case CURRENT_USER:
+                currentSesh.setCurrentUser((String) data);
+                break;
+            case MEALS:
+                currentSesh.addCurrentMeal((MealInfo) data);
+                break;
+            case RESTUANRANT:
+                currentSesh.setCurrentRestaurant((RestaurantInfo) data);
+            break;
+        }
+        storeData(currentSesh, sessionKey);
+    }
+
+    @Override
+    public void deleteFromSession(SessionContent type, Object data) {
+        Session currentSesh = new Session();
+        if(getSession() != null)
+            currentSesh = getSession();
+
+        switch (type) {
+            case CURRENT_USER:
+                currentSesh.clearCurrentUser();
+                break;
+            case MEALS:
+                currentSesh.deleteMeal((MealInfo) data);
+                break;
+            case RESTUANRANT:
+                currentSesh.clearCurrentRestaurant();
+                break;
+        }
+        storeData(currentSesh, sessionKey);
+    }
+
+    @Override
+    public Session getSession() {
+        String json = myPrefs.getString(sessionKey, sessionDefault);
+        if(!json.equals(sessionDefault))
+            return myGson.fromJson(json, Session.class);
+        else
+            return null;
+    }
+
+    @Override
+    public void eraseSession() {
+        removeValue(sessionKey);
+    }
+
+
 }

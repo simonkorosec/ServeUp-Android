@@ -26,5 +26,7 @@
 
     <!-- messages -->
     <string name="meals_empty_category_message">Restavracija nima izbranih jedi v kategoriji \'%s\'</string>
+    <string name="picked_meal_price_text">Cena: %.2f €</string>
+    <string name="picked_meal_overall_price_text">Znesek: %.2f €</string>
 
 </resources>
