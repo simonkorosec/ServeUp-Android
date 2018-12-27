@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import serve.serveup.R;
+import serve.serveup.utils.ContentStore;
+import serve.serveup.utils.Utils;
+import serve.serveup.views.navigation.BasketFragment;
 import serve.serveup.views.navigation.HomeFragment;
 import serve.serveup.views.navigation.OrdersFragment;
 import serve.serveup.views.navigation.ProfileFragment;
@@ -17,12 +20,14 @@ import serve.serveup.views.navigation.ProfileFragment;
 public class NavigationPanelActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener,
         OrdersFragment.OnFragmentInteractionListener,
-        ProfileFragment.OnFragmentInteractionListener {
+        ProfileFragment.OnFragmentInteractionListener,
+        BasketFragment.OnFragmentInteractionListener{
 
     private FrameLayout frameLayout;
     private HomeFragment homeFragment = new HomeFragment();
     private OrdersFragment ordersFragment = new OrdersFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
+    private BasketFragment basketFragment = new BasketFragment();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,10 +38,11 @@ public class NavigationPanelActivity extends AppCompatActivity implements
                 case R.id.navigation_home:
                     setFragment(homeFragment);
                     return true;
+                case R.id.navigation_basket:
+                    setFragment(basketFragment);
+                    return true;
                 case R.id.navigation_orders:
                     setFragment(ordersFragment);
-                    return true;
-                case R.id.navigation_neki:
                     return true;
                 case R.id.navigation_profile:
                     setFragment(profileFragment);
@@ -55,6 +61,9 @@ public class NavigationPanelActivity extends AppCompatActivity implements
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         frameLayout = findViewById(R.id.frame_container);
+
+        ContentStore mc = new ContentStore(getApplicationContext());
+        Utils.logInfo(mc.getSession().getCurrentUser() + "");
     }
 
     @Override

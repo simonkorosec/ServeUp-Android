@@ -2,6 +2,7 @@ package serve.serveup.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 
@@ -96,6 +97,7 @@ public class ContentStore implements SessionManager {
         storeData(currentSesh, sessionKey);
     }
 
+    @Nullable
     @Override
     public Session getSession() {
         String json = myPrefs.getString(sessionKey, sessionDefault);

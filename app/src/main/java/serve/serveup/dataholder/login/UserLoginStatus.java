@@ -1,4 +1,4 @@
-package serve.serveup.dataholder;
+package serve.serveup.dataholder.login;
 import com.squareup.moshi.Json;
 
 public class UserLoginStatus {

@@ -70,10 +70,10 @@ public class PickedMealActivity extends AppCompatActivity {
         });
 
 
-
         addToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pickedMeal.setKolicina(factor);
                 ContentStore myContentStore = new ContentStore(getApplicationContext());
                 myContentStore.addToSession(SessionContent.MEALS, pickedMeal);
                 myContentStore.addToSession(SessionContent.RESTUANRANT, pickedRestaurant);

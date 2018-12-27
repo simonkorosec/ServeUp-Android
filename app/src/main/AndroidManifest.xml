@@ -16,6 +16,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <intent-filter>
@@ -38,9 +39,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>
-        <activity android:name=".views.restaurant.PickedMealActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/FullScreenTheme">
+        <activity
+            android:name=".views.restaurant.PickedMealActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity android:name=".views.login.LoadingLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
         </activity>
     </application>
 

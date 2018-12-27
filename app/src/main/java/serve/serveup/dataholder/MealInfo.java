@@ -11,6 +11,8 @@ public class MealInfo implements Serializable {
     private String opisJedi;
     @Json(name = "cena")
     private float cena;
+    @Json(name = "kolicina")
+    private int kolicina;
 
     public String getImeJedi() {
         return imeJedi;
@@ -30,11 +32,14 @@ public class MealInfo implements Serializable {
     public void setCena(float cena) {
         this.cena = cena;
     }
+    public int getKolicina() { return kolicina; }
+    public void setKolicina(int kolicina) { this.kolicina = kolicina; }
 
     @Override
     public String toString() {
         return "Ime: " + this.getImeJedi() +
                 ", opis: " + this.getOpisJedi() +
-                ", cena: " + this.getCena();
+                ", cena: " + this.getCena() +
+                ", kolicina: " + this.getKolicina();
     }
 }

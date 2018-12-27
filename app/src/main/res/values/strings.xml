@@ -12,8 +12,8 @@
     <string name="sign_up">Sign up</string>
     <string name="title_activity_navigation_panel">NavigationPanelActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_orders">Orders</string>2
-    <string name="title_neki">Neki</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_basket">Shopping basket</string>
     <string name="title_profile">Profile</string>
 
 

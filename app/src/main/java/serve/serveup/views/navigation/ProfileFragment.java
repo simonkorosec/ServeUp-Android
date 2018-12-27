@@ -24,12 +24,9 @@ import serve.serveup.utils.CircleTransformation;
 import serve.serveup.utils.adapters.UserRecyclerAdapter;
 
 public class ProfileFragment extends Fragment {
-
-
     /*
     *  TODO  design userOption cards and its click events for further functionality
     * */
-
     private OnFragmentInteractionListener mListener;
     private RecyclerView userOptionRecyclerView;
     private UserRecyclerAdapter userOptionRecyclerAdapter;
@@ -56,18 +53,18 @@ public class ProfileFragment extends Fragment {
 
         userOptionsData = new ArrayList<>();
 
-        Bundle getUserInfo = getActivity().getIntent().getExtras();
-        UserInfo userInfo = (UserInfo) getUserInfo.getSerializable("userInfo");
+        Bundle myBundle = getActivity().getIntent().getExtras();
+        if(myBundle != null) {
+            UserInfo userInfo = (UserInfo) myBundle.getSerializable("userInfo");
 
-        Uri photoUrl = Uri.parse(userInfo.getPhotoUrl());
-        ImageView image = myContainer.findViewById(R.id.userPhoto);
-        TextView displayName = myContainer.findViewById(R.id.displayName);
+            Uri photoUrl = Uri.parse(userInfo.getPhotoUrl());
+            ImageView image = myContainer.findViewById(R.id.userPhoto);
+            TextView displayName = myContainer.findViewById(R.id.displayName);
 
-        userEmail = userInfo.getEmail();
-        displayName.setText(userInfo.getDisplayName());
-        Picasso.get().load(photoUrl).transform(new CircleTransformation()).into(image);
-
-
+            userEmail = userInfo.getEmail();
+            displayName.setText(userInfo.getDisplayName());
+            Picasso.get().load(photoUrl).transform(new CircleTransformation()).into(image);
+        }
         fillUpUserOptions();
 
         userOptionRecyclerView = myContainer.findViewById(R.id.userOptions);
@@ -77,9 +74,6 @@ public class ProfileFragment extends Fragment {
         // Set the layout manager and the adapter of the Recycler View
         userOptionRecyclerView.setLayoutManager(linearLayoutManager);
         userOptionRecyclerView.setAdapter(userOptionRecyclerAdapter);
-
-
-
         return myContainer;
     }
 
@@ -115,6 +109,7 @@ public class ProfileFragment extends Fragment {
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_account_set_up), "Account info"));
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_settings_20px), "Settings"));
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_sign_out_icon), "Log out"));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_info_24px), "About the app"));
     }
 
     private Drawable retDrawable(int resourceID) {

@@ -13,6 +13,7 @@ public class Session {
     private String currentUser;
     private RestaurantInfo currentRestaurant;
     private ArrayList<MealInfo> orderedMeals;
+    private float overAllPrice;
 
     public Session() {
         orderedMeals = new ArrayList<>();
@@ -49,5 +50,9 @@ public class Session {
         return this.orderedMeals;
     }
 
-
+    public float getOverAllPrice() {
+        for (MealInfo meal : this.getAllMeals())
+            overAllPrice += meal.getCena() * meal.getKolicina();
+        return overAllPrice;
+    }
 }

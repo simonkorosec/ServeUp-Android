@@ -27,7 +27,6 @@ import serve.serveup.R;
 import serve.serveup.dataholder.UserInfo;
 import serve.serveup.utils.GoogleSignInUtil;
 import serve.serveup.utils.Utils;
-import serve.serveup.views.NavigationPanelActivity;
 
 
 public class LoginFragment extends Fragment  {
@@ -176,14 +175,12 @@ public class LoginFragment extends Fragment  {
     }
 
     public void automaticSingIn() {
-        Bundle myBundle = new Bundle();
-        UserInfo myUserInfo = myGoogleUtil.getUserInfo();
+        final Bundle myBundle = new Bundle();
+        final UserInfo myUserInfo = myGoogleUtil.getUserInfo();
         myBundle.putSerializable("userInfo", myUserInfo);
-
-        Intent startMainPanel = new Intent(getActivity(), NavigationPanelActivity.class);
+        Intent startMainPanel = new Intent(getActivity(), LoadingLoginActivity.class);
         startMainPanel.putExtras(myBundle);
         startActivity(startMainPanel);
-        //Utils.showToast(getActivity(), "Signed in!");
     }
 
 

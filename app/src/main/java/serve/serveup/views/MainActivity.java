@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, myLoginFrag).commit();
-
-
     }
 
     @Override

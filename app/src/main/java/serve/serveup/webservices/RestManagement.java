@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 import serve.serveup.dataholder.MealInfo;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.dataholder.UserID;
-import serve.serveup.dataholder.UserLoginStatus;
+import serve.serveup.dataholder.login.UserLoginStatus;
 
 public class RestManagement {
 
