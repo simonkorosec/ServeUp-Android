@@ -12,18 +12,21 @@ import java.util.ArrayList;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
+import serve.serveup.utils.ContentStore;
 import serve.serveup.utils.adapters.FoodTypesAdapter;
 
 public class RestaurantActivity extends AppCompatActivity {
 
     private TextView imeRestavracijeText;
     private ImageView backButton;
+    private TextView cenaText;
 
     private RecyclerView foodRecyclerView;
     private FoodTypesAdapter foodRecyclerAdapter;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<String> foodTypes;
     private RestaurantInfo pickedRestaurant;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
         imeRestavracijeText = findViewById(R.id.imeRestavracijeText);
         foodRecyclerView = findViewById(R.id.foodTypesRecyclerview);
+        cenaText = findViewById(R.id.cenaText);
         backButton = findViewById(R.id.backIcon);
 
         foodTypes = new ArrayList<>();
@@ -59,6 +63,12 @@ public class RestaurantActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateOverallCenaText();
+    }
+
     private void populateFoodTypes() {
       //foodTypes.add(getResources().getString(R.string.kosila));
         foodTypes.add(getResources().getString(R.string.glavne_jedi));
@@ -66,6 +76,12 @@ public class RestaurantActivity extends AppCompatActivity {
         foodTypes.add(getResources().getString(R.string.solate));
         foodTypes.add(getResources().getString(R.string.sladice));
         foodTypes.add(getResources().getString(R.string.pijace));
+    }
+
+    private void updateOverallCenaText() {
+        ContentStore cntStore = new ContentStore(getApplicationContext());
+        float overAllPrice = cntStore.getSession().getOverAllPrice();
+        cenaText.setText(String.format("%.2f €", overAllPrice));
     }
 
 }

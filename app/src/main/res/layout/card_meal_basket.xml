@@ -71,14 +71,27 @@
         android:id="@+id/basketMealKolicinaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:paddingBottom="10dp"
         android:paddingEnd="10dp"
         android:paddingStart="10dp"
         android:text="Kolicina: "
         android:textColor="@color/signup_textfield_hint"
         android:textSize="18sp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/basketMealRestaurantText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:text="Restaurant "
+        android:textColor="@color/searchIconColor"
+        android:textSize="14sp"
+        />
 </LinearLayout>

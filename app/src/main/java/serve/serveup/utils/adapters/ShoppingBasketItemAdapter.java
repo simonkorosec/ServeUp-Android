@@ -37,6 +37,7 @@ public class ShoppingBasketItemAdapter
         TextView cardBasketDescription;
         TextView cardBasketPrice;
         TextView cardBasketAmount;
+        TextView cardBasketRestaurant;
         ImageView cancelMealButton;
 
         ShoppingBasketItemHolder(final View itemView) {
@@ -46,6 +47,7 @@ public class ShoppingBasketItemAdapter
             cardBasketDescription = itemView.findViewById(R.id.basketMealDescriptionText);
             cardBasketPrice = itemView.findViewById(R.id.basketMealPriceText);
             cardBasketAmount = itemView.findViewById(R.id.basketMealKolicinaText);
+            cardBasketRestaurant = itemView.findViewById(R.id.basketMealRestaurantText);
             cancelMealButton = itemView.findViewById(R.id.cancelMealButton);
         }
     }
@@ -78,8 +80,11 @@ public class ShoppingBasketItemAdapter
         holder.cardBasketDescription.setText(myMeal.getOpisJedi());
         holder.cardBasketPrice.setText(holder.cardBasketPrice.getText().toString() + " " + myMeal.getCena() + " €");
         holder.cardBasketAmount.setText(holder.cardBasketAmount.getText().toString() + " " + myMeal.getKolicina() + "x");
+        if(cntStore.getSession().getCurrentRestaurant() != null)
+            holder.cardBasketRestaurant.setText(cntStore.getSession()
+                    .getCurrentRestaurant()
+                    .getImeRestavracije());
 
-        
         // delete meal from adapter and from current Session
         holder.cancelMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
