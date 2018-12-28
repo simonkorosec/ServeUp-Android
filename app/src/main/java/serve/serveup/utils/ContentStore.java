@@ -85,12 +85,15 @@ public class ContentStore implements SessionManager {
 
         switch (type) {
             case CURRENT_USER:
+                Utils.logInfo("Delete current user: " + currentSesh.getCurrentUser() + " from session");
                 currentSesh.clearCurrentUser();
                 break;
             case MEALS:
+                Utils.logInfo("Delete meal: " + ((MealInfo) data).getUniqueName() + " from session");
                 currentSesh.deleteMeal((MealInfo) data);
                 break;
             case RESTUANRANT:
+                Utils.logInfo("Delete current restaurant: " + currentSesh.getCurrentRestaurant() + " from session");
                 currentSesh.clearCurrentRestaurant();
                 break;
         }

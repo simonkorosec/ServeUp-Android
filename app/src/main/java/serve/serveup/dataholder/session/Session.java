@@ -43,8 +43,15 @@ public class Session {
     public void addCurrentMeal(MealInfo meal) {
         this.orderedMeals.add(meal);
     }
-    public void deleteMeal(MealInfo meal) {
-        this.orderedMeals.remove(meal);
+    public void deleteMeal(MealInfo removedMeal) {
+        if(removedMeal != null) {
+            for (MealInfo meal : getAllMeals()) {
+                if (meal.getUniqueName().equals(removedMeal.getUniqueName())) {
+                    this.orderedMeals.remove(meal);
+                    break;
+                }
+            }
+        }
     }
     public ArrayList<MealInfo> getAllMeals() {
         return this.orderedMeals;

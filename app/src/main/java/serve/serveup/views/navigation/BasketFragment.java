@@ -4,15 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import serve.serveup.R;
+import serve.serveup.utils.adapters.ShoppingBasketItemAdapter;
 
 public class BasketFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView shoppingBasketRecycleView;
+    private ShoppingBasketItemAdapter shoppingBasketItemAdapter;
+    private LinearLayoutManager linearLayoutManager;
+    private TextView emptyBasketText;
+
+    private Context myContext;
 
     public BasketFragment() {
         // Required empty public constructor
@@ -27,7 +37,23 @@ public class BasketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_basket, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_basket, container, false);
+
+        myContext = getActivity().getApplicationContext();
+        emptyBasketText = rootView.findViewById(R.id.emptyBasketText);
+
+        // Initialize the view components
+        shoppingBasketRecycleView = rootView.findViewById(R.id.shoppingBasketRecyclerView);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        shoppingBasketItemAdapter = new ShoppingBasketItemAdapter(myContext);
+
+        // Set the layout manager and the adapter of the Recycler View
+        shoppingBasketRecycleView.setLayoutManager(linearLayoutManager);
+        shoppingBasketRecycleView.setAdapter(shoppingBasketItemAdapter);
+
+        emptyBasketText.setVisibility(shoppingBasketItemAdapter.getItemCount() < 1 ? View.VISIBLE : View.GONE);
+
+        return rootView;
     }
 
     public void onButtonPressed(Uri uri) {

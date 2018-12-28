@@ -63,7 +63,8 @@ public class NavigationPanelActivity extends AppCompatActivity implements
         frameLayout = findViewById(R.id.frame_container);
 
         ContentStore mc = new ContentStore(getApplicationContext());
-        Utils.logInfo(mc.getSession().getCurrentUser() + "");
+        Utils.logInfo("Current session user: " + mc.getSession().getCurrentUser());
+        Utils.logInfo("Current meals in basket session: " + mc.getSession().getAllMeals());
     }
 
     @Override

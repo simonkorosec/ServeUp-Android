@@ -15,6 +15,7 @@
     <string name="title_orders">Orders</string>
     <string name="title_basket">Shopping basket</string>
     <string name="title_profile">Profile</string>
+    <string name="empty_basket">Vaša košarica je trenutno prazna</string>
 
 
     <string name="kosila">Kosila</string>

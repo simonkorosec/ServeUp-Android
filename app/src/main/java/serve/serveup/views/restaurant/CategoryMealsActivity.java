@@ -47,8 +47,7 @@ public class CategoryMealsActivity extends AppCompatActivity {
         pickedRestaurant = (RestaurantInfo) passedIntent.getSerializableExtra("restaurant");
         categoryName = passedIntent.getStringExtra("category_name");
 
-        Utils.logMultipleData("category meals", categoryMeals,
-                "category name", categoryName,
+        Utils.logMultipleData("category name", categoryName,
                 "picked restaurant", pickedRestaurant);
 
 

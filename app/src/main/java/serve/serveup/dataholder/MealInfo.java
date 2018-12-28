@@ -3,6 +3,8 @@ package serve.serveup.dataholder;
 import com.squareup.moshi.Json;
 import java.io.Serializable;
 
+import serve.serveup.utils.Utils;
+
 public class MealInfo implements Serializable {
 
     @Json(name = "ime_jedi")
@@ -13,6 +15,7 @@ public class MealInfo implements Serializable {
     private float cena;
     @Json(name = "kolicina")
     private int kolicina;
+    private String uniqueName;
 
     public String getImeJedi() {
         return imeJedi;
@@ -35,11 +38,20 @@ public class MealInfo implements Serializable {
     public int getKolicina() { return kolicina; }
     public void setKolicina(int kolicina) { this.kolicina = kolicina; }
 
+    public void setUniqueName() {
+        this.uniqueName = "MEAL:" + Utils.randomID();
+    }
+
+    public String getUniqueName() {
+        return this.uniqueName;
+    }
+
     @Override
     public String toString() {
         return "Ime: " + this.getImeJedi() +
                 ", opis: " + this.getOpisJedi() +
                 ", cena: " + this.getCena() +
-                ", kolicina: " + this.getKolicina();
+                ", kolicina: " + this.getKolicina() +
+                ", unique name: " + this.getUniqueName();
     }
 }

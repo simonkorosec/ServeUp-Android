@@ -27,7 +27,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:tint="@color/backIconColor"
-            app:layout_constraintBottom_toTopOf="@+id/pickedMealTitleText"
+            app:layout_constraintBottom_toTopOf="@+id/basketMealTitleText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pickedMealBackNavigation">
 
         <TextView
-            android:id="@+id/pickedMealTitleText"
+            android:id="@+id/basketMealTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

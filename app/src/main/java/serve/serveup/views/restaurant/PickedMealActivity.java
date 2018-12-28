@@ -22,7 +22,7 @@ public class PickedMealActivity extends AppCompatActivity {
     @NonNull
     private RestaurantInfo pickedRestaurant;
     private float overAllPrice;
-    private int factor;
+    private int factor = 1;
 
     private TextView pickedMealTitle;
     private TextView pickedMealDescription;
@@ -41,7 +41,7 @@ public class PickedMealActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picked_meal);
 
-        pickedMealTitle = findViewById(R.id.pickedMealTitleText);
+        pickedMealTitle = findViewById(R.id.basketMealTitleText);
         pickedMealDescription = findViewById(R.id.pickedMealDescriptionText);
         pickedMealPrice = findViewById(R.id.pickedMealPriceText);
         descMealButton = findViewById(R.id.descMealButton);
@@ -54,6 +54,8 @@ public class PickedMealActivity extends AppCompatActivity {
 
         Intent passedIntent = getIntent();
         pickedMeal = (MealInfo) passedIntent.getSerializableExtra("picked_meal");
+        // important to set unique ID name
+        pickedMeal.setUniqueName();
         pickedRestaurant = (RestaurantInfo) passedIntent.getSerializableExtra("picked_restaurant");
 
         pickedMealTitle.setText(pickedMeal.getImeJedi());
@@ -63,12 +65,10 @@ public class PickedMealActivity extends AppCompatActivity {
                         pickedMeal.getCena()));
 
         setIncrAndDecrPrice();
-
         backToPickedMealIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { finish(); }
         });
-
 
         addToBasketButton.setOnClickListener(new View.OnClickListener() {
             @Override

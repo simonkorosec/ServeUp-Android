@@ -8,6 +8,8 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -112,6 +114,10 @@ public class Utils {
             }
         }
         return myStrings;
+    }
+
+    public static String randomID() {
+        return RandomStringUtils.randomAlphanumeric(20);
     }
 
 
