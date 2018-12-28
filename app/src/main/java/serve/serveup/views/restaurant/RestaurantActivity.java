@@ -1,4 +1,4 @@
-package serve.serveup.views;
+package serve.serveup.views.restaurant;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
-import serve.serveup.utils.FoodTypesAdapter;
+import serve.serveup.utils.adapters.FoodTypesAdapter;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -23,6 +23,7 @@ public class RestaurantActivity extends AppCompatActivity {
     private FoodTypesAdapter foodRecyclerAdapter;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<String> foodTypes;
+    private RestaurantInfo pickedRestaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,12 @@ public class RestaurantActivity extends AppCompatActivity {
         Bundle getBundle = getIntent().getExtras();
 
         if (getBundle != null) {
-            RestaurantInfo pickedRestaurant = (RestaurantInfo) getBundle.getSerializable("restaurant_info");
+            pickedRestaurant = (RestaurantInfo) getBundle.getSerializable("restaurant_info");
             imeRestavracijeText.setText(pickedRestaurant.getImeRestavracije());
         }
         // Initialize the view components
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        foodRecyclerAdapter = new FoodTypesAdapter(foodTypes);
+        foodRecyclerAdapter = new FoodTypesAdapter(foodTypes, pickedRestaurant);
         // Set the layout manager and the adapter of the Recycler View
         foodRecyclerView.setLayoutManager(linearLayoutManager);
         foodRecyclerView.setAdapter(foodRecyclerAdapter);
@@ -59,9 +60,9 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     private void populateFoodTypes() {
-        foodTypes.add(getResources().getString(R.string.kosila));
-        foodTypes.add(getResources().getString(R.string.juhe));
+      //foodTypes.add(getResources().getString(R.string.kosila));
         foodTypes.add(getResources().getString(R.string.glavne_jedi));
+        foodTypes.add(getResources().getString(R.string.juhe));
         foodTypes.add(getResources().getString(R.string.solate));
         foodTypes.add(getResources().getString(R.string.sladice));
         foodTypes.add(getResources().getString(R.string.pijace));

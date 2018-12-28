@@ -1,4 +1,4 @@
-package serve.serveup.views;
+package serve.serveup.views.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -136,14 +136,13 @@ public class LoginFragment extends Fragment  {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success
                             automaticSingIn();
                         }
                         else {
                             // If sign in fails, display a message to the user.
                             Utils.logInfo("Sing in failed!");
                         }
-
                     }
                 });
     }
@@ -176,14 +175,12 @@ public class LoginFragment extends Fragment  {
     }
 
     public void automaticSingIn() {
-        Bundle myBundle = new Bundle();
-        UserInfo myUserInfo = myGoogleUtil.getUserInfo();
+        final Bundle myBundle = new Bundle();
+        final UserInfo myUserInfo = myGoogleUtil.getUserInfo();
         myBundle.putSerializable("userInfo", myUserInfo);
-
-        Intent startMainPanel = new Intent(getActivity(), NavigationPanelActivity.class);
+        Intent startMainPanel = new Intent(getActivity(), LoadingLoginActivity.class);
         startMainPanel.putExtras(myBundle);
         startActivity(startMainPanel);
-        //Utils.showToast(getActivity(), "Signed in!");
     }
 
 

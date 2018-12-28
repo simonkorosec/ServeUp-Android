@@ -1,13 +1,15 @@
 package serve.serveup.webservices;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
+import serve.serveup.dataholder.MealInfo;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.dataholder.UserID;
-import serve.serveup.dataholder.UserLoginStatus;
+import serve.serveup.dataholder.login.UserLoginStatus;
 
 public class RestManagement {
 
@@ -35,6 +37,12 @@ public class RestManagement {
         return myRetrofit
                 .create(GetRestaurants.class)
                 .getRestaurantsByCity(location);
+    }
+
+    public static Call<Map<String, List<MealInfo>>> getRestraurantMeals(int id) {
+        return myRetrofit
+                .create(GetRestaurantMeals.class)
+                .getRestaurantMeals(id);
     }
 
 

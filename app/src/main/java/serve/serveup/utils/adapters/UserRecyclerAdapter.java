@@ -1,4 +1,4 @@
-package serve.serveup.utils;
+package serve.serveup.utils.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +19,8 @@ import java.util.List;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.ProfileOption;
+import serve.serveup.utils.ContentStore;
+import serve.serveup.utils.Utils;
 
 public class UserRecyclerAdapter
         extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerHolder> {
@@ -80,6 +82,8 @@ public class UserRecyclerAdapter
                     case 3:
                         logOut();
                         break;
+                    case 4:
+                        break;
                 }
             }
         });
@@ -92,6 +96,11 @@ public class UserRecyclerAdapter
 
 
     private void logOut() {
+        // erase current session and sign out of the application
+        Utils.logInfo("Erase current session.");
+        ContentStore cntStore = new ContentStore(this.myContext);
+        cntStore.eraseSession();
+
         Utils.logInfo("current user: " + FirebaseAuth.getInstance().getCurrentUser());
         FirebaseAuth.getInstance().signOut();
         ((Activity)this.myContext).finish();

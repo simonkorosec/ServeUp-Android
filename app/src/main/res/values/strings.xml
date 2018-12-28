@@ -12,10 +12,10 @@
     <string name="sign_up">Sign up</string>
     <string name="title_activity_navigation_panel">NavigationPanelActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_orders">Orders</string>2
-    <string name="title_neki">Neki</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_basket">Shopping basket</string>
     <string name="title_profile">Profile</string>
-
+    <string name="empty_basket">Vaša košarica je trenutno prazna</string>
 
 
     <string name="kosila">Kosila</string>
@@ -24,5 +24,10 @@
     <string name="solate">Solate</string>
     <string name="sladice">Sladice</string>
     <string name="pijace">Pijače</string>
+
+    <!-- messages -->
+    <string name="meals_empty_category_message">Restavracija nima izbranih jedi v kategoriji \'%s\'</string>
+    <string name="picked_meal_price_text">Cena: %.2f €</string>
+    <string name="picked_meal_overall_price_text">Znesek: %.2f €</string>
 
 </resources>

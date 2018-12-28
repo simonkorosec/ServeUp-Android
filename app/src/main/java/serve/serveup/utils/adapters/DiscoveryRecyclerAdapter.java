@@ -1,4 +1,4 @@
-package serve.serveup.utils;
+package serve.serveup.utils.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,8 @@ import java.util.List;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
-import serve.serveup.views.RestaurantActivity;
+import serve.serveup.utils.Utils;
+import serve.serveup.views.restaurant.RestaurantActivity;
 
 public class DiscoveryRecyclerAdapter
         extends RecyclerView.Adapter<DiscoveryRecyclerAdapter.DiscoveryRecyclerHolder> {

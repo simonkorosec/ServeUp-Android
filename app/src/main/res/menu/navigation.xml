@@ -6,15 +6,15 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home"/>
 
+   <item
+        android:id="@+id/navigation_basket"
+        android:icon="@drawable/ic_baseline_shopping_basket_24px"
+        android:title="@string/title_basket"/>
     <item
         android:id="@+id/navigation_orders"
         android:icon="@drawable/ic_baseline_receipt_24px"
         android:title="@string/title_orders"/>
 
-   <item
-        android:id="@+id/navigation_neki"
-        android:icon="@drawable/ic_baseline_reorder_24px"
-        android:title="@string/title_neki"/>
 
     <item
         android:id="@+id/navigation_profile"

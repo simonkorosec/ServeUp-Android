@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
-import serve.serveup.utils.DiscoveryRecyclerAdapter;
+import serve.serveup.utils.adapters.DiscoveryRecyclerAdapter;
 import serve.serveup.utils.Utils;
 import serve.serveup.webservices.RestManagement;
 
