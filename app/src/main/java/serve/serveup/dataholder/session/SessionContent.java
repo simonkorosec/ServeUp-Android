@@ -9,6 +9,8 @@ public enum SessionContent {
     RESTUANRANT,
     // current user type
     CURRENT_USER,
-    // meals type
+    // picked meal type
+    PICKED_MEAL,
+    // all meals type
     MEALS
 }

@@ -1,8 +1,12 @@
 package serve.serveup.utils;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
@@ -13,7 +17,10 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import serve.serveup.R;
@@ -116,8 +123,48 @@ public class Utils {
         return myStrings;
     }
 
+
+    public static void createDialog(Activity myActivity, String title, String message, String okButton, String cancelButton,
+                                    final DialogPassableMethod myCommand) {
+        AlertDialog.Builder myBuilder;
+        myBuilder = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+                new AlertDialog.Builder(myActivity, android.R.style.Theme_Material_Light_Dialog_Alert) : new AlertDialog.Builder(myActivity);
+
+        myBuilder.setTitle(title).setMessage(message)
+                .setPositiveButton(okButton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        myCommand.executeMethod();
+                    }
+                })
+                .setNegativeButton(cancelButton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // blank
+                    }
+                })
+                .show();
+    }
+
+
+    @NonNull
     public static String randomID() {
         return RandomStringUtils.randomAlphanumeric(20);
+    }
+
+
+    public static String createDateTimeString(String... addedTime) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date myDate = new Date();
+        if(addedTime.length > 0) {
+            int addedMinutes = Integer.parseInt(addedTime[0]);
+            myDate = org.apache.commons.lang3.time.DateUtils.
+                    addMinutes(myDate, addedMinutes);
+        }
+        String returnDate = format.format(myDate)
+                .replace(" ", "T");
+
+        return returnDate;
     }
 
 

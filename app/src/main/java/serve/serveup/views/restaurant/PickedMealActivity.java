@@ -75,7 +75,7 @@ public class PickedMealActivity extends AppCompatActivity {
             public void onClick(View view) {
                 pickedMeal.setKolicina(factor);
                 ContentStore myContentStore = new ContentStore(getApplicationContext());
-                myContentStore.addToSession(SessionContent.MEALS, pickedMeal);
+                myContentStore.addToSession(SessionContent.PICKED_MEAL, pickedMeal);
                 myContentStore.addToSession(SessionContent.RESTUANRANT, pickedRestaurant);
 
                 // TODO add a success loading screen when meal is added to the basket

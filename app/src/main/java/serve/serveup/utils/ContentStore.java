@@ -67,7 +67,7 @@ public class ContentStore implements SessionManager {
             case CURRENT_USER:
                 currentSesh.setCurrentUser((String) data);
                 break;
-            case MEALS:
+            case PICKED_MEAL:
                 currentSesh.addCurrentMeal((MealInfo) data);
                 break;
             case RESTUANRANT:
@@ -88,9 +88,13 @@ public class ContentStore implements SessionManager {
                 Utils.logInfo("Delete current user: " + currentSesh.getCurrentUser() + " from session");
                 currentSesh.clearCurrentUser();
                 break;
-            case MEALS:
+            case PICKED_MEAL:
                 Utils.logInfo("Delete meal: " + ((MealInfo) data).getUniqueName() + " from session");
                 currentSesh.deleteMeal((MealInfo) data);
+                break;
+            case MEALS:
+                Utils.logInfo("Delete all meals from session.");
+                currentSesh.deleteAllMeals();
                 break;
             case RESTUANRANT:
                 Utils.logInfo("Delete current restaurant: " + currentSesh.getCurrentRestaurant() + " from session");

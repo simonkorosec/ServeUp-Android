@@ -16,6 +16,8 @@ public class MealInfo implements Serializable {
     @Json(name = "kolicina")
     private int kolicina;
     private String uniqueName;
+    @Json(name = "id_jed")
+    private int jedID;
 
     public String getImeJedi() {
         return imeJedi;
@@ -32,11 +34,18 @@ public class MealInfo implements Serializable {
     public float getCena() {
         return cena;
     }
+    public int getJedID() {
+        return jedID;
+    }
+
     public void setCena(float cena) {
         this.cena = cena;
     }
     public int getKolicina() { return kolicina; }
     public void setKolicina(int kolicina) { this.kolicina = kolicina; }
+    public void setJedID(int jedID) {
+        this.jedID = jedID;
+    }
 
     public void setUniqueName() {
         this.uniqueName = "MEAL:" + Utils.randomID();
@@ -49,6 +58,7 @@ public class MealInfo implements Serializable {
     @Override
     public String toString() {
         return "Ime: " + this.getImeJedi() +
+                ", id jedi: " + this.getJedID() +
                 ", opis: " + this.getOpisJedi() +
                 ", cena: " + this.getCena() +
                 ", kolicina: " + this.getKolicina() +

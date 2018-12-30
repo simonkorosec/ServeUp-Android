@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
-import serve.serveup.utils.adapters.DiscoveryRecyclerAdapter;
 import serve.serveup.utils.Utils;
+import serve.serveup.utils.adapters.DiscoveryRecyclerAdapter;
 import serve.serveup.webservices.RestManagement;
 
 public class HomeFragment extends Fragment {
@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView discoveryRecyclerView;
     private DiscoveryRecyclerAdapter discoveryRecyclerAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private ProgressBar myProgressBar;
+    private LinearLayout myProgressBarLayout;
     // Contains data of every restaurant home page info
     private List<RestaurantInfo> restaurantHomes;
 
@@ -49,8 +49,8 @@ public class HomeFragment extends Fragment {
 
         restaurantHomes = new ArrayList<>();
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        myProgressBar = rootView.findViewById(R.id.homeProgressBar);
-        myProgressBar.setVisibility(View.VISIBLE);
+        myProgressBarLayout = rootView.findViewById(R.id.loadingProgressBarContainer);
+        myProgressBarLayout.setVisibility(View.VISIBLE);
         /*myProgressBar.getIndeterminateDrawable()
                 .setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorDarkGrey), PorterDuff.Mode.SRC_IN );*/
 
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
                 List<RestaurantInfo> myRests = response.body();
                 if(getActivity() != null) {
                     restaurantHomes = myRests;
-                    myProgressBar.setVisibility(View.GONE);
+                    myProgressBarLayout.setVisibility(View.GONE);
                 }
                 // Initialize the view components
                 discoveryRecyclerView = rootView.findViewById(R.id.discoveryRecyclerView);
