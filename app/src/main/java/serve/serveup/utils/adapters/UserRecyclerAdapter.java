@@ -1,7 +1,6 @@
 package serve.serveup.utils.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -20,16 +19,17 @@ import java.util.List;
 import serve.serveup.R;
 import serve.serveup.dataholder.ProfileOption;
 import serve.serveup.utils.ContentStore;
+import serve.serveup.utils.DialogPassableMethod;
 import serve.serveup.utils.Utils;
 
 public class UserRecyclerAdapter
         extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerHolder> {
 
     private List<ProfileOption> userOptions;
-    private Context myContext;
+    private Activity myActivity;
 
     /* TODO implement user profile functionalities for use profile
-    *  TODO info about email, account info, settings, log out option
+    *  TODO info about email, account info, settings
     * */
 
 
@@ -46,9 +46,9 @@ public class UserRecyclerAdapter
         }
     }
 
-    public UserRecyclerAdapter(Context myContext, List<ProfileOption> userOptions) {
+    public UserRecyclerAdapter(Activity myActivity, List<ProfileOption> userOptions) {
         this.userOptions = userOptions;
-        this.myContext = myContext;
+        this.myActivity = myActivity;
     }
 
     @NonNull
@@ -65,8 +65,7 @@ public class UserRecyclerAdapter
         holder.cardDiscoveryTitle.setText(profileOption.getOptionTitle());
         Drawable myIcon = profileOption.getIcon();
 
-        Context myCnx = holder.cardDiscoveryImage.getContext();
-        DrawableCompat.setTint(myIcon, myCnx.getResources().getColor(R.color.colorAccent));
+        DrawableCompat.setTint(myIcon, myActivity.getResources().getColor(R.color.colorAccent));
         holder.cardDiscoveryImage.setImageDrawable(profileOption.getIcon());
 
         holder.cardUserOptionView.setOnClickListener(new View.OnClickListener() {
@@ -96,14 +95,24 @@ public class UserRecyclerAdapter
 
 
     private void logOut() {
-        // erase current session and sign out of the application
-        Utils.logInfo("Erase current session.");
-        ContentStore cntStore = new ContentStore(this.myContext);
-        cntStore.eraseSession();
+        
+        Utils.createDialog(myActivity, "Log out",
+                "Se želite izpisati iz aplikacije",
+                "OK", "Cancel",
+                new DialogPassableMethod() {
+                    @Override
+                    public void executeMethod() {
+                        // erase current session and sign out of the application
+                        Utils.logInfo("Erase current session.");
+                        ContentStore cntStore = new ContentStore(myActivity);
+                        cntStore.eraseSession();
 
-        Utils.logInfo("current user: " + FirebaseAuth.getInstance().getCurrentUser());
-        FirebaseAuth.getInstance().signOut();
-        ((Activity)this.myContext).finish();
+                        Utils.logInfo("current user: " + FirebaseAuth.getInstance().getCurrentUser());
+                        FirebaseAuth.getInstance().signOut();
+                        myActivity.finish();
+
+                    }
+                }
+        );
     }
-
 }

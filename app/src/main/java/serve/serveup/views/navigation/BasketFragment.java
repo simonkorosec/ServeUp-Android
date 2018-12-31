@@ -1,6 +1,7 @@
 package serve.serveup.views.navigation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,18 +13,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import serve.serveup.R;
-import serve.serveup.dataholder.apistatus.ApiStatus;
-import serve.serveup.dataholder.apistatus.ApiStatusType;
-import serve.serveup.dataholder.order.Order;
-import serve.serveup.dataholder.session.Session;
-import serve.serveup.utils.ContentStore;
-import serve.serveup.utils.Utils;
 import serve.serveup.utils.adapters.ShoppingBasketItemAdapter;
-import serve.serveup.webservices.RestManagement;
+import serve.serveup.views.order.PaymentOptionActivity;
 
 public class BasketFragment extends Fragment {
 
@@ -33,9 +25,6 @@ public class BasketFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private TextView emptyBasketText;
     private LinearLayout makeOrderButton;
-
-    private Context myContext;
-    private ContentStore cntStore;
 
     public BasketFragment() {
         // Required empty public constructor
@@ -55,11 +44,6 @@ public class BasketFragment extends Fragment {
         emptyBasketText = rootView.findViewById(R.id.emptyBasketText);
         makeOrderButton = rootView.findViewById(R.id.makeOrderButton);
 
-        if(getActivity() != null)
-            myContext = getActivity().getApplicationContext();
-
-        cntStore =  new ContentStore(myContext);
-
         // Initialize the view components
         shoppingBasketRecycleView = rootView.findViewById(R.id.shoppingBasketRecyclerView);
         linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -71,42 +55,15 @@ public class BasketFragment extends Fragment {
 
         emptyBasketText.setVisibility(shoppingBasketItemAdapter.getItemCount() < 1 ? View.VISIBLE : View.GONE);
         
-        
-        final Order myOrder = createNewOrder();
-
         makeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                RestManagement.createNewOrderByUser(myOrder).enqueue(new Callback<ApiStatus>() {
-                    @Override
-                    public void onResponse(Call<ApiStatus> call, Response<ApiStatus> response) {
-
-                        ApiStatus returnStatus = response.body();
-                        Utils.logInfo("status: " + returnStatus.getStatus());
-                        Utils.logInfo("message: " + returnStatus.getDescription());
-
-                        if(returnStatus.getStatus() == ApiStatusType.OK_STATUS.getStatus()) {
-
-                            Utils.logInfo("kul order");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiStatus> call, Throwable t) {
-                        Utils.logInfo("api 'orders/new_order/' failed");
-                    }
-                });
+                Intent myIntent = new Intent(getActivity(), PaymentOptionActivity.class);
+                startActivity(myIntent);
             }
         });
 
         return rootView;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -128,20 +85,5 @@ public class BasketFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
-
-    private Order createNewOrder() {
-        Order newOrder = new Order();
-        Session currentSesh = cntStore.getSession();
-        newOrder.setCasNarocila(Utils.createDateTimeString());
-        newOrder.setCasPrevzema("2018-12-22T14:34:00");
-        
-        if(currentSesh.mealsNotEmpty() && currentSesh.userIsSet() && currentSesh.restaurantIsSet()) {
-            
-            newOrder.setRestavracijaID(currentSesh.getCurrentRestaurant().getIdRestavracija());
-            newOrder.setUporabnikID(currentSesh.getCurrentUser());
-            newOrder.setMeals(currentSesh.getAllMeals());
-        }
-        return newOrder;
     }
 }
