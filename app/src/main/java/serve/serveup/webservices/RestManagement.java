@@ -6,11 +6,12 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
-import serve.serveup.dataholder.apistatus.ApiStatus;
 import serve.serveup.dataholder.MealInfo;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.dataholder.UserID;
+import serve.serveup.dataholder.apistatus.ApiStatus;
 import serve.serveup.dataholder.order.Order;
+import serve.serveup.dataholder.order.ReturnedOrderApiResponse;
 
 public class RestManagement {
 
@@ -50,6 +51,12 @@ public class RestManagement {
         return myRetrofit
                 .create(NewOrderByUser.class)
                 .createNewOrderByUser(myOrder);
+    }
+
+    public static Call<ReturnedOrderApiResponse> getUserOrders(String userID, int numOrders) {
+        return myRetrofit
+                .create(GetUserOrders.class)
+                .getUserOrders(userID, numOrders);
     }
 
 

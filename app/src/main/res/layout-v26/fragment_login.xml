@@ -120,15 +120,13 @@
             android:id="@+id/textSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="176dp"
-            android:layout_marginEnd="189dp"
             android:layout_marginBottom="8dp"
             android:text="@string/sign_up"
             android:textColor="#C1C1C1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/google_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google_button"
@@ -175,6 +173,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="0.483"/>
+
+        <Button
+            android:id="@+id/fakeLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Fake login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_sign_in"
+            tools:layout_editor_absoluteY="386dp"/>
 
     </android.support.constraint.ConstraintLayout >
 

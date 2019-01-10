@@ -10,6 +10,11 @@ public class UserInfo implements Serializable {
     private String uID;
     private String photoUrl;
 
+
+    public UserInfo() {
+
+    }
+
     public UserInfo(GoogleSignInAccount user) {
         this.email = user.getEmail();
         this.displayName = user.getDisplayName();
