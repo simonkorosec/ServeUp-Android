@@ -171,13 +171,13 @@
                 android:layout_width="55dp"
                 android:layout_height="45dp"
                 android:layout_marginBottom="5dp"
-                app:srcCompat="@drawable/paypal_logo"/>
+                app:srcCompat="@drawable/visa_logo"/>
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="55dp"
                 android:layout_height="45dp"
-                app:srcCompat="@drawable/visa_logo"/>
+                app:srcCompat="@drawable/paypal_logo"/>
         </LinearLayout>
     </LinearLayout>
 
