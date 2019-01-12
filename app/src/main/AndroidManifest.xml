@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="serve.serveup"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="serve.serveup">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,55 +15,48 @@
             android:name=".views.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
             android:name=".views.NavigationPanelActivity"
             android:label="@string/title_activity_navigation_panel"
             android:screenOrientation="portrait"
-            android:theme="@style/NavigationPanelTheme">
-        </activity>
+            android:theme="@style/NavigationPanelTheme"></activity>
         <activity
             android:name=".views.restaurant.RestaurantActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
         <activity
             android:name=".views.restaurant.CategoryMealsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
         <activity
             android:name=".views.restaurant.PickedMealActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
         <activity
             android:name=".views.login.LoadingLoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
         <activity
             android:name=".views.order.PaymentOptionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
         <activity
             android:name=".views.order.PickedOrderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
         <activity
             android:name=".views.order.ProcessingPaymentActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme">
-        </activity>
+            android:theme="@style/FullScreenTheme"></activity>
+        <activity android:name=".views.SearchActivity"></activity>
     </application>
 
 </manifest>
