@@ -1,6 +1,5 @@
 package serve.serveup.views.restaurant;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,8 +15,6 @@ import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.utils.ContentStore;
 import serve.serveup.utils.adapters.FoodTypesAdapter;
-import serve.serveup.views.NavigationPanelActivity;
-import serve.serveup.views.order.PaymentOptionActivity;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -42,7 +39,7 @@ public class RestaurantActivity extends AppCompatActivity {
         foodRecyclerView = findViewById(R.id.foodTypesRecyclerview);
         cenaText = findViewById(R.id.cenaText);
         backButton = findViewById(R.id.backIcon);
-        goToBasketButton.findViewById(R.id.goToBasketButton);
+        goToBasketButton = findViewById(R.id.goToBasketButton);
 
         foodTypes = new ArrayList<>();
         populateFoodTypes();
@@ -67,7 +64,7 @@ public class RestaurantActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: go to BasketFragment
+        // TODO: go to BasketFragment
 //        goToBasketButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
