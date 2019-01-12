@@ -16,6 +16,9 @@
     <string name="title_basket">Shopping basket</string>
     <string name="title_profile">Profile</string>
     <string name="empty_basket">Vaša košarica je trenutno prazna</string>
+    <string name="title_time_basket">Predviden čas prihoda čez:</string>
+    <string name="minutes_text">10</string>
+    <string name="title_minutes">minut.</string>
     <string name="basket">Košarica</string>
 
 

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,12 @@ public class BasketFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private TextView emptyBasketText;
     private LinearLayout makeOrderButton;
+
+    private ImageView incMinutesButton;
+    private ImageView decMinutesButton;
+    private TextView totalMinutesText;
+    private int totalMinutes;
+    private int minutes = 10;
 
     public BasketFragment() {
         // Required empty public constructor
@@ -49,6 +56,14 @@ public class BasketFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         shoppingBasketItemAdapter = new ShoppingBasketItemAdapter(getActivity());
 
+        // Initialize view components for expected arrival time
+        incMinutesButton = rootView.findViewById(R.id.incMinutes);
+        decMinutesButton = rootView.findViewById(R.id.decMinutes);
+        totalMinutesText = rootView.findViewById(R.id.minute);
+
+        setIncrAndDecrMinutes();
+
+
         // Set the layout manager and the adapter of the Recycler View
         shoppingBasketRecycleView.setLayoutManager(linearLayoutManager);
         shoppingBasketRecycleView.setAdapter(shoppingBasketItemAdapter);
@@ -64,6 +79,33 @@ public class BasketFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void setIncrAndDecrMinutes() {
+
+        totalMinutesText.setText(R.string.minutes_text);
+
+        incMinutesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (totalMinutes < 90) {
+                    totalMinutes = Integer.parseInt(totalMinutesText.getText().toString());
+                    totalMinutes += minutes;
+                    totalMinutesText.setText(String.valueOf(totalMinutes));
+                }
+            }
+        });
+
+        decMinutesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (totalMinutes > 10) {
+                    totalMinutes = Integer.parseInt(totalMinutesText.getText().toString());
+                    totalMinutes -= minutes;
+                    totalMinutesText.setText(String.valueOf(totalMinutes));
+                }
+            }
+        });
     }
 
     @Override
