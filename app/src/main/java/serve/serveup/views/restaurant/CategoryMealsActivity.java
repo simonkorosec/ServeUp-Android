@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 import serve.serveup.R;
 import serve.serveup.dataholder.MealInfo;
 import serve.serveup.dataholder.RestaurantInfo;
+import serve.serveup.utils.ContentStore;
 import serve.serveup.utils.Utils;
 import serve.serveup.utils.adapters.MealsAdapter;
 
@@ -30,6 +32,8 @@ public class CategoryMealsActivity extends AppCompatActivity {
     private TextView imeRestavracijeText;
     private TextView categoryText;
     private ImageView backButton;
+    private TextView cenaCategoryText;
+    private LinearLayout cenaCategoryContainer;
 
 
     @Override
@@ -41,6 +45,8 @@ public class CategoryMealsActivity extends AppCompatActivity {
         categoryText = findViewById(R.id.categoryText);
         mealsRecyclerView = findViewById(R.id.mealsRecyclerView);
         backButton = findViewById(R.id.backToRestaurantIcon);
+        cenaCategoryText = findViewById(R.id.cenaTextCategory);
+        cenaCategoryContainer = findViewById(R.id.cenaCategoryContainer);
 
         Intent passedIntent = getIntent();
         categoryMeals = (List<MealInfo>) passedIntent.getSerializableExtra("picked_restaurant_meals");
@@ -67,6 +73,18 @@ public class CategoryMealsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateOverallCenaText();
+    }
+
+    private void updateOverallCenaText() {
+        ContentStore cntStore = new ContentStore(getApplicationContext());
+        float overAllPrice = cntStore.getSession().getOverAllPrice();
+        cenaCategoryText.setText(String.format("%.2f €", overAllPrice));
     }
 
 }

@@ -4,55 +4,94 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import serve.serveup.R;
+import serve.serveup.dataholder.order.ReturnedOrder;
+import serve.serveup.dataholder.order.ReturnedOrderApiResponse;
+import serve.serveup.utils.ContentStore;
+import serve.serveup.utils.Utils;
+import serve.serveup.utils.adapters.OrdersAdapter;
+import serve.serveup.webservices.RestManagement;
 
 public class OrdersFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private ContentStore cntStore;
+    private String userID;
+
+    private LinearLayoutManager layoutManager;
+    private RecyclerView myRecyclerView;
+    private OrdersAdapter ordersAdapter;
+    private TextView noOrdersText;
+    private ProgressBar ordersProgressBar;
 
     public OrdersFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static OrdersFragment newInstance(String param1, String param2) {
-        OrdersFragment fragment = new OrdersFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_orders, container, false);
+        View root =  inflater.inflate(R.layout.fragment_orders, container, false);
+
+        myRecyclerView = root.findViewById(R.id.ordersRecyclerView);
+        noOrdersText = root.findViewById(R.id.noOrdersText);
+        noOrdersText.setVisibility(View.GONE);
+        ordersProgressBar = root.findViewById(R.id.ordersProgressBar);
+        ordersProgressBar.setVisibility(View.VISIBLE);
+        layoutManager = new LinearLayoutManager(getActivity());
+
+        cntStore = new ContentStore(getActivity().getApplicationContext());
+
+        if (cntStore.getSession().userIsSet()) {
+            userID = cntStore.getSession().getCurrentUser();
+
+            RestManagement.getUserOrders(userID, 10).enqueue(new Callback<ReturnedOrderApiResponse>() {
+                @Override
+                public void onResponse(Call<ReturnedOrderApiResponse> call, Response<ReturnedOrderApiResponse> response) {
+                    if (response.code() == 200) {
+                        ReturnedOrderApiResponse returnedResponse = response.body();
+
+                        if (returnedResponse.getStatus() == 1) {
+                            Utils.logInfo("recieved back orders from server for current user");
+                            ArrayList<ReturnedOrder> orders = new ArrayList<>(returnedResponse.getOrders());
+                            ordersAdapter = new OrdersAdapter(orders);
+                            noOrdersText.setVisibility((orders.size() == 0) ? View.VISIBLE : View.GONE);
+                        }
+                        myRecyclerView.setAdapter(ordersAdapter);
+                        myRecyclerView.setLayoutManager(layoutManager);
+                    } else
+                        noOrdersText.setVisibility(View.VISIBLE);
+                    ordersProgressBar.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onFailure(Call<ReturnedOrderApiResponse> call, Throwable t) {
+                    Utils.logInfo("api 'user/get_orders' failed");
+                }
+            });
+
+        }
+        return root;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -77,7 +116,6 @@ public class OrdersFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

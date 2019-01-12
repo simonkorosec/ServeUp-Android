@@ -8,8 +8,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import serve.serveup.R;
+import serve.serveup.dataholder.apistatus.ApiStatus;
 import serve.serveup.dataholder.UserInfo;
-import serve.serveup.dataholder.login.UserLoginStatus;
 import serve.serveup.dataholder.login.UserStatusType;
 import serve.serveup.dataholder.session.SessionContent;
 import serve.serveup.utils.ContentStore;
@@ -27,11 +27,11 @@ public class LoadingLoginActivity extends AppCompatActivity {
         final Bundle myBundle = getIntent().getExtras();
         final UserInfo myUserInfo = (UserInfo) myBundle.getSerializable("userInfo");
 
-        RestManagement.getLoginStatusCall(myUserInfo.getuID()).enqueue(new Callback<UserLoginStatus>() {
+        RestManagement.getLoginStatusCall(myUserInfo.getuID()).enqueue(new Callback<ApiStatus>() {
             @Override
-            public void onResponse(Call<UserLoginStatus> call, Response<UserLoginStatus> response) {
+            public void onResponse(Call<ApiStatus> call, Response<ApiStatus> response) {
 
-                UserLoginStatus myUserLogin = response.body();
+                ApiStatus myUserLogin = response.body();
 
                 if(myUserLogin != null) {
                     Utils.logInfo(myUserLogin.getDescription() + ", status: " + myUserLogin.getStatus());
@@ -52,7 +52,7 @@ public class LoadingLoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserLoginStatus> call, Throwable t) {
+            public void onFailure(Call<ApiStatus> call, Throwable t) {
                 Utils.logInfo("api 'user/register/' failed!");
             }
         });

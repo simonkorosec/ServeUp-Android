@@ -18,6 +18,7 @@ import java.util.List;
 
 import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
+import serve.serveup.utils.ContentStore;
 import serve.serveup.utils.Utils;
 import serve.serveup.views.restaurant.RestaurantActivity;
 
@@ -76,6 +77,7 @@ public class DiscoveryRecyclerAdapter
         // Get the restaurant home info for the appropriate restaurant
         RestaurantInfo restInfo = this.restaurantsHome.get(position);
         Context myContext = holder.cardDiscoveryTitle.getContext();
+        ContentStore cntStore = new ContentStore(myContext);
 
         // Set the Holder (card) values based on the values from the data list
         holder.restaurantID = restInfo.getIdRestavracija();
@@ -114,5 +116,15 @@ public class DiscoveryRecyclerAdapter
         this.restaurantsHome.clear();
         this.restaurantsHome.addAll(RestaurantInfosNew);
         notifyDataSetChanged();
+    }
+
+    private void enableView(View myView) {
+        myView.setEnabled(true);
+        myView.setAlpha(1f);
+    }
+
+    private void disableView(View myView) {
+        myView.setEnabled(false);
+        myView.setAlpha(.5f);
     }
 }

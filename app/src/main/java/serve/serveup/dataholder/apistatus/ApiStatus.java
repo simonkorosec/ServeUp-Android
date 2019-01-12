@@ -1,7 +1,7 @@
-package serve.serveup.dataholder.login;
+package serve.serveup.dataholder.apistatus;
 import com.squareup.moshi.Json;
 
-public class UserLoginStatus {
+public class ApiStatus {
 
 
     @Json(name = "status")

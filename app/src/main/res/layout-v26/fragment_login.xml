@@ -9,27 +9,25 @@
     tools:context=".views.login.LoginFragment">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/login_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_container">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
             android:text="@string/serve_up"
-            android:textColor="#00C4AB"
+            android:textColor="@color/colorAccent"
             android:textSize="29sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -85,8 +83,8 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="57dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="58dp"
+                android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/colorLightGrey"
                 app:cardCornerRadius="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,8 +118,6 @@
             android:id="@+id/textSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="176dp"
-            android:layout_marginEnd="189dp"
             android:layout_marginBottom="8dp"
             android:text="@string/sign_up"
             android:textColor="#C1C1C1"
@@ -147,26 +143,25 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/forgot_password"
             android:textColor="@color/colorDarkGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
             android:id="@+id/button_sign_in"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="162dp"
+            android:layout_width="100dp"
+            android:layout_height="39dp"
             android:layout_marginStart="161dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="162dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/colorAccent"
             android:text="@string/sign_in"
             app:layout_constraintBottom_toTopOf="@+id/textSignUp"
@@ -174,9 +169,37 @@
             app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.483"/>
+            app:layout_constraintVertical_bias="0.483" />
 
-    </android.support.constraint.ConstraintLayout >
+        <Button
+            android:id="@+id/fakeLogin"
+            android:layout_width="110dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Fake login"
+            app:layout_constraintBottom_toTopOf="@+id/textSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_sign_in"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="152dp"
+            android:layout_height="143dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:src="@mipmap/serveup_logo_foreground"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>

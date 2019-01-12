@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/serveup_logo_foreground"
+        android:roundIcon="@mipmap/serveup_logo_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -44,7 +44,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>
-        <activity android:name=".views.login.LoadingLoginActivity"
+        <activity
+            android:name=".views.login.LoadingLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.order.PaymentOptionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.order.PickedOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.order.ProcessingPaymentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>

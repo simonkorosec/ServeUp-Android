@@ -14,10 +14,11 @@ public class Session {
     private RestaurantInfo currentRestaurant;
     private ArrayList<MealInfo> orderedMeals;
     private float overAllPrice;
+    private String DEFAULT_USER = "default_user";
 
     public Session() {
-        orderedMeals = new ArrayList<>();
-        currentUser = "default_user";
+        this.orderedMeals = new ArrayList<>();
+        this.currentUser = DEFAULT_USER;
     }
 
     public void setCurrentUser(String currentUser) {
@@ -27,7 +28,7 @@ public class Session {
         return currentUser;
     }
     public void clearCurrentUser() {
-        this.currentUser = "default_user";
+        this.currentUser = DEFAULT_USER;
     }
 
     public void setCurrentRestaurant(RestaurantInfo currentRestaurant) {
@@ -53,6 +54,9 @@ public class Session {
             }
         }
     }
+    public void deleteAllMeals() {
+        this.orderedMeals = new ArrayList<>();
+    }
     public ArrayList<MealInfo> getAllMeals() {
         return this.orderedMeals;
     }
@@ -61,5 +65,21 @@ public class Session {
         for (MealInfo meal : this.getAllMeals())
             overAllPrice += meal.getCena() * meal.getKolicina();
         return overAllPrice;
+    }
+
+    public boolean mealsNotEmpty() {
+        return this.getAllMeals().size() != 0;
+    }
+
+    public void clearOverAllPrice() {
+        overAllPrice = 0;
+    }
+
+    public boolean userIsSet() {
+        return !this.getCurrentUser().equals(DEFAULT_USER);
+    }
+
+    public boolean restaurantIsSet() {
+        return this.getCurrentRestaurant() != null;
     }
 }

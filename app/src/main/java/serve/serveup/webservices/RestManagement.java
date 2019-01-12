@@ -9,7 +9,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 import serve.serveup.dataholder.MealInfo;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.dataholder.UserID;
-import serve.serveup.dataholder.login.UserLoginStatus;
+import serve.serveup.dataholder.apistatus.ApiStatus;
+import serve.serveup.dataholder.order.Order;
+import serve.serveup.dataholder.order.ReturnedOrderApiResponse;
 
 public class RestManagement {
 
@@ -21,7 +23,7 @@ public class RestManagement {
             .build();
 
 
-    public static Call<UserLoginStatus> getLoginStatusCall(String id_uporabnik) {
+    public static Call<ApiStatus> getLoginStatusCall(String id_uporabnik) {
         return myRetrofit
                 .create(LoginStatus.class)
                 .getLoginStatus(id_uporabnik);
@@ -43,6 +45,18 @@ public class RestManagement {
         return myRetrofit
                 .create(GetRestaurantMeals.class)
                 .getRestaurantMeals(id);
+    }
+
+    public static Call<ApiStatus> createNewOrderByUser(Order myOrder) {
+        return myRetrofit
+                .create(NewOrderByUser.class)
+                .createNewOrderByUser(myOrder);
+    }
+
+    public static Call<ReturnedOrderApiResponse> getUserOrders(String userID, int numOrders) {
+        return myRetrofit
+                .create(GetUserOrders.class)
+                .getUserOrders(userID, numOrders);
     }
 
 

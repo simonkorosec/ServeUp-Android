@@ -1,6 +1,6 @@
 package serve.serveup.utils.adapters;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +17,7 @@ import serve.serveup.R;
 import serve.serveup.dataholder.MealInfo;
 import serve.serveup.dataholder.session.SessionContent;
 import serve.serveup.utils.ContentStore;
+import serve.serveup.utils.DialogPassableMethod;
 import serve.serveup.utils.Utils;
 
 public class ShoppingBasketItemAdapter
@@ -26,7 +27,7 @@ public class ShoppingBasketItemAdapter
     private MealInfo currentMeal;
     private List<MealInfo> meals;
     private ContentStore cntStore;
-    private Context myContext;
+    private Activity myActivity;
 
     // Define the View Holder
     static class ShoppingBasketItemHolder extends RecyclerView.ViewHolder {
@@ -37,6 +38,7 @@ public class ShoppingBasketItemAdapter
         TextView cardBasketDescription;
         TextView cardBasketPrice;
         TextView cardBasketAmount;
+        TextView cardBasketRestaurant;
         ImageView cancelMealButton;
 
         ShoppingBasketItemHolder(final View itemView) {
@@ -46,14 +48,15 @@ public class ShoppingBasketItemAdapter
             cardBasketDescription = itemView.findViewById(R.id.basketMealDescriptionText);
             cardBasketPrice = itemView.findViewById(R.id.basketMealPriceText);
             cardBasketAmount = itemView.findViewById(R.id.basketMealKolicinaText);
+            cardBasketRestaurant = itemView.findViewById(R.id.basketMealRestaurantText);
             cancelMealButton = itemView.findViewById(R.id.cancelMealButton);
         }
     }
 
     // Adapter constructor
-    public ShoppingBasketItemAdapter(Context myContext) {
-        this.myContext = myContext;
-        this.cntStore = new ContentStore(myContext);
+    public ShoppingBasketItemAdapter(Activity myActivity) {
+        this.myActivity = myActivity;
+        this.cntStore = new ContentStore(myActivity);
         this.meals = cntStore.getSession().getAllMeals();
     }
     /*
@@ -78,20 +81,35 @@ public class ShoppingBasketItemAdapter
         holder.cardBasketDescription.setText(myMeal.getOpisJedi());
         holder.cardBasketPrice.setText(holder.cardBasketPrice.getText().toString() + " " + myMeal.getCena() + " €");
         holder.cardBasketAmount.setText(holder.cardBasketAmount.getText().toString() + " " + myMeal.getKolicina() + "x");
+        if(cntStore.getSession().getCurrentRestaurant() != null)
+            holder.cardBasketRestaurant.setText(cntStore.getSession()
+                    .getCurrentRestaurant()
+                    .getImeRestavracije());
 
-        
+
         // delete meal from adapter and from current Session
         holder.cancelMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                currentMeal = meals.get(holder.getAdapterPosition());
-                Utils.logInfo("Current deleted meal: " + currentMeal);
-                if(currentMeal != null) {
-                    meals.remove(currentMeal);
-                    cntStore.deleteFromSession(SessionContent.MEALS, currentMeal);
-                    notifyItemRemoved(holder.getAdapterPosition());
-                }
-                makeEmptyBasketTextVisible(view);
+            public void onClick(final View view) {
+
+                Utils.createDialog(myActivity, "Izbriši",
+                        "Želite izbrisati iz košarice?",
+                        "OK",
+                        "Cancel",
+                        new DialogPassableMethod() {
+                            @Override
+                            public void executeMethod() {
+                                currentMeal = meals.get(holder.getAdapterPosition());
+                                Utils.logInfo("Current deleted meal: " + currentMeal);
+                                if(currentMeal != null) {
+                                    meals.remove(currentMeal);
+                                    cntStore.deleteFromSession(SessionContent.PICKED_MEAL, currentMeal);
+                                    notifyItemRemoved(holder.getAdapterPosition());
+                                }
+                                makeEmptyBasketTextVisible(view);
+                            }
+                        }
+                );
             }
         });
 
@@ -133,7 +151,7 @@ public class ShoppingBasketItemAdapter
                 .getParent()
                 .getParent();
 
-        TextView emptyBasketText = (TextView) parentLayout.getChildAt(2);
+        TextView emptyBasketText = (TextView) parentLayout.getChildAt(3);
         if (meals.size() < 1) {
             if (emptyBasketText != null) {
                 emptyBasketText.setVisibility(View.VISIBLE);
