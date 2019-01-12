@@ -60,13 +60,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
     public void onBindViewHolder(@NonNull final OrdersHolder holder, int position) {
         final ReturnedOrder order = this.orders.get(position);
 
+        String casPrevzema = Utils.parseDateTimeString(order.getCasPrevzema())
+                .split(" ")[1];
+
         final Context myContext = holder.cardOrderContainer.getContext();
         holder.cardOrderRestaurant.setText(order.getImeRestavracije());
         holder.cardOrderStatus.setText(OrderStatusType.getName(order.getStatus()));
         holder.cardOrderDatePurchased.setText(Utils.parseDateTimeString(order.getCasNarocila()));
-        holder.cardOrderDateFinished.setText(Utils.parseDateTimeString(order.getCasPrevzema()));
-
-
+        holder.cardOrderDateFinished.setText(casPrevzema);
         holder.cardOrderPrice.setText(String.format("%.2f €", order.getCena()));
 
         holder.cardOrderContainer.setOnClickListener(new View.OnClickListener() {

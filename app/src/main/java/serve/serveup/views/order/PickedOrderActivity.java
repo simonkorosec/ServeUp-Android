@@ -46,8 +46,6 @@ public class PickedOrderActivity extends AppCompatActivity {
             myRecyclerView.setAdapter(mealsAdapter);
             myRecyclerView.setLayoutManager(layoutManager);
 
-
-
         }
 
 

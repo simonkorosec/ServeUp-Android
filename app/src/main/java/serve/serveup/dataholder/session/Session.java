@@ -71,6 +71,10 @@ public class Session {
         return this.getAllMeals().size() != 0;
     }
 
+    public void clearOverAllPrice() {
+        overAllPrice = 0;
+    }
+
     public boolean userIsSet() {
         return !this.getCurrentUser().equals(DEFAULT_USER);
     }

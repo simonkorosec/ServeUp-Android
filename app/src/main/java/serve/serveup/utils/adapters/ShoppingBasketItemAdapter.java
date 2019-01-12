@@ -151,7 +151,7 @@ public class ShoppingBasketItemAdapter
                 .getParent()
                 .getParent();
 
-        TextView emptyBasketText = (TextView) parentLayout.getChildAt(2);
+        TextView emptyBasketText = (TextView) parentLayout.getChildAt(3);
         if (meals.size() < 1) {
             if (emptyBasketText != null) {
                 emptyBasketText.setVisibility(View.VISIBLE);

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import serve.serveup.R;
+import serve.serveup.utils.Utils;
 import serve.serveup.utils.adapters.ShoppingBasketItemAdapter;
 import serve.serveup.views.order.PaymentOptionActivity;
 
@@ -30,7 +31,7 @@ public class BasketFragment extends Fragment {
     private ImageView incMinutesButton;
     private ImageView decMinutesButton;
     private TextView totalMinutesText;
-    private int totalMinutes;
+    private int totalMinutes = 10;
     private int minutes = 10;
 
     public BasketFragment() {
@@ -63,7 +64,6 @@ public class BasketFragment extends Fragment {
 
         setIncrAndDecrMinutes();
 
-
         // Set the layout manager and the adapter of the Recycler View
         shoppingBasketRecycleView.setLayoutManager(linearLayoutManager);
         shoppingBasketRecycleView.setAdapter(shoppingBasketItemAdapter);
@@ -73,7 +73,9 @@ public class BasketFragment extends Fragment {
         makeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String casPrevzema = Utils.createDateTimeString(String.valueOf(totalMinutes));
                 Intent myIntent = new Intent(getActivity(), PaymentOptionActivity.class);
+                myIntent.putExtra("order_pickup_time", casPrevzema);
                 startActivity(myIntent);
             }
         });
@@ -89,7 +91,6 @@ public class BasketFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (totalMinutes < 90) {
-                    totalMinutes = Integer.parseInt(totalMinutesText.getText().toString());
                     totalMinutes += minutes;
                     totalMinutesText.setText(String.valueOf(totalMinutes));
                 }
@@ -100,7 +101,6 @@ public class BasketFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (totalMinutes > 10) {
-                    totalMinutes = Integer.parseInt(totalMinutesText.getText().toString());
                     totalMinutes -= minutes;
                     totalMinutesText.setText(String.valueOf(totalMinutes));
                 }

@@ -59,6 +59,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>
+        <activity
+            android:name=".views.order.ProcessingPaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
     </application>
 
 </manifest>

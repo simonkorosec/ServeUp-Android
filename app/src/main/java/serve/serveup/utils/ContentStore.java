@@ -78,7 +78,7 @@ public class ContentStore implements SessionManager {
     }
 
     @Override
-    public void deleteFromSession(SessionContent type, Object data) {
+    public void deleteFromSession(SessionContent type, Object... data) {
         Session currentSesh = new Session();
         if(getSession() != null)
             currentSesh = getSession();
@@ -89,8 +89,8 @@ public class ContentStore implements SessionManager {
                 currentSesh.clearCurrentUser();
                 break;
             case PICKED_MEAL:
-                Utils.logInfo("Delete meal: " + ((MealInfo) data).getUniqueName() + " from session");
-                currentSesh.deleteMeal((MealInfo) data);
+                Utils.logInfo("Delete meal: " + ((MealInfo) data[0]).getUniqueName() + " from session");
+                currentSesh.deleteMeal((MealInfo) data[0]);
                 break;
             case MEALS:
                 Utils.logInfo("Delete all meals from session.");

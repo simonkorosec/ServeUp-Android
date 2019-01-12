@@ -1,23 +1,19 @@
 package serve.serveup.views.order;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import serve.serveup.R;
-import serve.serveup.dataholder.order.Order;
-import serve.serveup.dataholder.session.Session;
-import serve.serveup.utils.ContentStore;
 import serve.serveup.utils.Utils;
 
 public class PaymentOptionActivity extends AppCompatActivity {
 
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
     private View payButton;
     private View backToOrderIcon;
 
@@ -28,26 +24,46 @@ public class PaymentOptionActivity extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radioGroup);
         payButton = findViewById(R.id.payButton);
-        backToOrderIcon = findViewById(R.id.backToOrderIcon);
+        backToOrderIcon = findViewById(R.id.backToBasketIcon);
+
+        Intent myIntent = getIntent();
 
         backToOrderIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { finish(); }
-        });
-
-        payButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButton = findViewById(radioId);
-                openDialog();
-            }
+                finish();
+             }
         });
 
-    }
+        if(myIntent != null) {
+            final String casPrevzema = myIntent.getStringExtra("order_pickup_time");
 
-    public void openDialog() {
-        PayDialog payDialog = new PayDialog();
-        payDialog.show(getSupportFragmentManager(), "pay dialog");
+            payButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int radioID = radioGroup.getCheckedRadioButtonId();
+                    View radioButton = findViewById(radioID);
+                    int index = radioGroup.indexOfChild(radioButton);
+
+                    if (index != -1) {
+                        AlertDialog.Builder bulder = new AlertDialog.Builder(PaymentOptionActivity.this);
+                        bulder.setTitle("Potrditev plačila");
+                        bulder.setMessage("Potrjujem izbiro plačila");
+                        bulder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent myIntent = new Intent(getApplicationContext(), ProcessingPaymentActivity.class);
+                                myIntent.putExtra("payment_order_time", casPrevzema);
+                                startActivity(myIntent);
+                                finish();
+                            }
+                        }).create().show();
+                    } else
+                        Utils.showToast(getApplicationContext(), "Prosimo izberite možnost plačila");
+                }
+            });
+
+        }
+
     }
 }
