@@ -9,9 +9,11 @@
     tools:context=".views.login.LoginFragment">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/login_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_container">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textView"
@@ -85,8 +87,8 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="57dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="58dp"
+                android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/colorLightGrey"
                 app:cardCornerRadius="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +128,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/google_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google_button"
@@ -145,26 +147,25 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/forgot_password"
             android:textColor="@color/colorDarkGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
             android:id="@+id/button_sign_in"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="162dp"
+            android:layout_width="100dp"
+            android:layout_height="39dp"
             android:layout_marginStart="161dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="162dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/colorAccent"
             android:text="@string/sign_in"
             app:layout_constraintBottom_toTopOf="@+id/textSignUp"
@@ -172,20 +173,25 @@
             app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.483"/>
+            app:layout_constraintVertical_bias="0.483" />
 
         <Button
             android:id="@+id/fakeLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_width="110dp"
+            android:layout_height="41dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Fake login"
+            app:layout_constraintBottom_toTopOf="@+id/textSignUp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_sign_in"
-            tools:layout_editor_absoluteY="386dp"/>
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_sign_in"
+            app:layout_constraintVertical_bias="0.0" />
 
-    </android.support.constraint.ConstraintLayout >
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>
