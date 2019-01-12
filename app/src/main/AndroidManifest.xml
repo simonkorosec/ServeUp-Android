@@ -49,9 +49,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>
-        <activity android:name=".views.order.PaymentOptionActivity"
-              android:screenOrientation="portrait"
-              android:theme="@style/FullScreenTheme">
+        <activity
+            android:name=".views.order.PaymentOptionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.order.PickedOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
         </activity>
     </application>
 

@@ -17,6 +17,7 @@
     <string name="title_profile">Profile</string>
     <string name="empty_basket">Vaša košarica je trenutno prazna</string>
     <string name="basket">Košarica</string>
+    <string name="no_orders">Trenutno nimate nobenih naročil</string>
 
 
     <string name="kosila">Kosila</string>

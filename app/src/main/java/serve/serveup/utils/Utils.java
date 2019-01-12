@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -165,6 +166,20 @@ public class Utils {
                 .replace(" ", "T");
 
         return returnDate;
+    }
+
+    public static String parseDateTimeString(String dateTime) {
+        try {
+            dateTime = dateTime
+                    .replace("T", " ")
+                    .replace("Z", "");
+            DateFormat previosForamt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date newDate = previosForamt.parse(dateTime);
+            DateFormat newFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+            return newFormat.format(newDate);
+        }
+        catch (ParseException e) { Utils.logInfo("Parse DateTime exception"); }
+        return "DEFAULT";
     }
 
 

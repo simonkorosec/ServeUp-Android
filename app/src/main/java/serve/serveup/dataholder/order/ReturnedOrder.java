@@ -2,11 +2,12 @@ package serve.serveup.dataholder.order;
 
 import com.squareup.moshi.Json;
 
+import java.io.Serializable;
 import java.util.List;
 
 import serve.serveup.dataholder.MealInfo;
 
-public class ReturnedOrder {
+public class ReturnedOrder implements Serializable {
 
     @Json(name = "id_narocila")
     private int idNarocila;

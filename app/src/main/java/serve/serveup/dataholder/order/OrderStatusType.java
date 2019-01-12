@@ -4,11 +4,11 @@ public enum OrderStatusType {
 
 
     // new order status
-    NEW(0),
+    NOVO(0),
     // ready order status
-    READY(1),
+    PRIPRAVLJENO(1),
     // finished order status
-    FINISHED(2);
+    KONCANO(2);
 
     private int status;
 
@@ -18,4 +18,14 @@ public enum OrderStatusType {
     public int getStatus() {
         return status;
     }
+
+    public static String getName(int index) {
+        for (OrderStatusType status : OrderStatusType.values()) {
+            if (status.getStatus() == index)
+                return status.toString();
+        }
+        return "DEFAULT";
+    }
+
+
 }
