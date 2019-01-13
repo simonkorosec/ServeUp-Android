@@ -74,8 +74,16 @@
             android:name=".views.order.ProcessingPaymentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme" />
-        <activity android:name=".views.SearchActivity" />
-        <activity android:name=".views.AboutActivity"></activity>
+        <activity
+            android:name=".views.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchActivityTheme">
+        </activity>
+        <activity
+            android:name=".views.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
     </application>
 
 </manifest>
