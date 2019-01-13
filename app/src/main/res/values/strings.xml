@@ -17,10 +17,28 @@
     <string name="title_profile">Profile</string>
     <string name="empty_basket">Vaša košarica je trenutno prazna</string>
     <string name="title_time_basket">Predviden čas prihoda čez:</string>
-    <string name="minutes_text">10</string>
+    <string name="minutes_text">30</string>
     <string name="title_minutes">minut.</string>
     <string name="basket">Košarica</string>
     <string name="no_orders">Trenutno nimate nobenih naročil</string>
+    <string name="find_restaurants">Najdi restavracije</string>
+    <string name="find_location">Lokacija</string>
+    <string name="find_food">Hrana</string>
+    <string name="find_from">Termin od</string>
+    <string name="find_to">Termin do</string>
+    <string name="find_button">Iskanje</string>
+    <string name="about_text">O aplikaciji</string>
+
+    <string name="about">Aplikacija ServeUp je namenjena uporabnikom, ki si želijo novega pristopa naročanja v restavracijah.\n\n\n
+                            ServeUp ekipa:\n\n
+                            Jernej Stražišar\n
+                            Žiga Smrkolj\n
+                            Urban Jagodic\n
+                            Matevž Sešel\n
+                            Lucijan Kvar\n
+                            Simon Korošec\n
+                            Jure Repe</string>
+    <string name="copyright">©ServeUp 2019</string>
 
 
     <string name="kosila">Kosila</string>

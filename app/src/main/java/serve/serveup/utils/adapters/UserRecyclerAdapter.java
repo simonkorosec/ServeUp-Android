@@ -1,6 +1,7 @@
 package serve.serveup.utils.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -21,17 +22,13 @@ import serve.serveup.dataholder.ProfileOption;
 import serve.serveup.utils.ContentStore;
 import serve.serveup.utils.DialogPassableMethod;
 import serve.serveup.utils.Utils;
+import serve.serveup.views.AboutActivity;
 
 public class UserRecyclerAdapter
         extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerHolder> {
 
     private List<ProfileOption> userOptions;
     private Activity myActivity;
-
-    /* TODO implement user profile functionalities for use profile
-    *  TODO info about email, account info, settings
-    * */
-
 
     static class UserRecyclerHolder extends RecyclerView.ViewHolder {
         CardView cardUserOptionView;
@@ -82,6 +79,7 @@ public class UserRecyclerAdapter
                         logOut();
                         break;
                     case 4:
+                        openAboutApp();
                         break;
                 }
             }
@@ -114,5 +112,10 @@ public class UserRecyclerAdapter
                     }
                 }
         );
+    }
+
+    private void openAboutApp() {
+        Intent myIntent = new Intent(myActivity, AboutActivity.class);
+        myActivity.startActivity(myIntent);
     }
 }

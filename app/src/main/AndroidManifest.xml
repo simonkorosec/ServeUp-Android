@@ -3,14 +3,25 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/serveup_logo_foreground"
-        android:roundIcon="@mipmap/serveup_logo_foreground"
+        android:icon="@mipmap/serveup_logo2_foreground"
+        android:roundIcon="@mipmap/serveup_logo2_foreground"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode"/>
+
         <activity
             android:name=".views.MainActivity"
             android:screenOrientation="portrait">
@@ -61,6 +72,24 @@
         </activity>
         <activity
             android:name=".views.order.ProcessingPaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme"/>
+        <activity
+            android:name=".views.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchActivityTheme">
+        </activity>
+        <activity
+            android:name=".views.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.order.QRcodeScannerActivity"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.order.ProcessingQRCodeConfirmationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>
