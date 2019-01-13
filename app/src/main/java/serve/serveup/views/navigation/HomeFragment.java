@@ -22,7 +22,7 @@ import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.utils.Utils;
 import serve.serveup.utils.adapters.DiscoveryRecyclerAdapter;
-import serve.serveup.views.SearchActivity;
+import serve.serveup.views.search.SearchActivity;
 import serve.serveup.webservices.RestManagement;
 
 public class HomeFragment extends Fragment {

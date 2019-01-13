@@ -72,7 +72,7 @@ public class ContentStore implements SessionManager {
                 break;
             case RESTUANRANT:
                 currentSesh.setCurrentRestaurant((RestaurantInfo) data);
-            break;
+                break;
         }
         storeData(currentSesh, sessionKey);
     }
