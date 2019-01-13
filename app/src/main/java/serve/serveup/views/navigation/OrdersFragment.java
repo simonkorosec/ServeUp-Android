@@ -37,6 +37,8 @@ public class OrdersFragment extends Fragment {
     private TextView noOrdersText;
     private ProgressBar ordersProgressBar;
 
+    private ArrayList<ReturnedOrder> orders;
+
     public OrdersFragment() {
         // Required empty public constructor
     }
@@ -59,6 +61,7 @@ public class OrdersFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
 
         cntStore = new ContentStore(getActivity().getApplicationContext());
+        orders = new ArrayList<>();
 
         if (cntStore.getSession().userIsSet()) {
             userID = cntStore.getSession().getCurrentUser();
@@ -71,11 +74,9 @@ public class OrdersFragment extends Fragment {
 
                         if (returnedResponse.getStatus() == 1) {
                             Utils.logInfo("recieved back orders from server for current user");
-                            ArrayList<ReturnedOrder> orders = new ArrayList<>(returnedResponse.getOrders());
-                            ordersAdapter = new OrdersAdapter(orders);
-                            noOrdersText.setVisibility((orders.size() == 0) ? View.VISIBLE : View.GONE);
+                            orders = new ArrayList<>(returnedResponse.getOrders());
+                            updateOrders();
                         }
-                        myRecyclerView.setAdapter(ordersAdapter);
                         myRecyclerView.setLayoutManager(layoutManager);
                     } else
                         noOrdersText.setVisibility(View.VISIBLE);
@@ -115,7 +116,19 @@ public class OrdersFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateOrders();
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void updateOrders() {
+        ordersAdapter = new OrdersAdapter(orders);
+        noOrdersText.setVisibility((orders.size() == 0) ? View.VISIBLE : View.GONE);
+        myRecyclerView.setAdapter(ordersAdapter);
     }
 }

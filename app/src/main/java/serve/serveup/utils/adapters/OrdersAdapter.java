@@ -66,6 +66,22 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
         final Context myContext = holder.cardOrderContainer.getContext();
         holder.cardOrderRestaurant.setText(order.getImeRestavracije());
         holder.cardOrderStatus.setText(OrderStatusType.getName(order.getStatus()));
+
+
+        int orderStatusColor = R.color.searchIconColor;
+
+        if(order.getStatus() == OrderStatusType.NOVO.getStatus())
+            orderStatusColor = (R.color.order_status_new);
+        else if (order.getStatus() == OrderStatusType.PRIPRAVLJENO.getStatus())
+            orderStatusColor = R.color.order_status_prepared;
+
+        if(order.getCheckedIn()) {
+            holder.cardOrderStatus.setText(OrderStatusType.KONCANO.toString());
+            orderStatusColor = R.color.order_status_finished;
+        }
+
+        holder.cardOrderStatus.setTextColor(myContext.getResources().getColor(orderStatusColor));
+
         holder.cardOrderDatePurchased.setText(Utils.parseDateTimeString(order.getCasNarocila()));
         holder.cardOrderDateFinished.setText(casPrevzema);
         holder.cardOrderPrice.setText(String.format("%.2f €", order.getCena()));
@@ -75,6 +91,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
             public void onClick(View view) {
 
                 pickedOrder = orders.get(holder.getAdapterPosition());
+                Utils.logInfo("checked in: " + pickedOrder.getCheckedIn());
                 if (pickedOrder != null) {
                     Intent myIntent = new Intent(view.getContext(), PickedOrderActivity.class);
                     myIntent.putExtra("picked_order", pickedOrder);

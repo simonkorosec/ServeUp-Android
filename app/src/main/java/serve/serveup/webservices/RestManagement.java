@@ -59,6 +59,12 @@ public class RestManagement {
                 .getUserOrders(userID, numOrders);
     }
 
+    public static Call<ApiStatus> orderCheckIn(int idNarocila, String qrCode) {
+        return myRetrofit
+                .create(OrderCheckIn.class)
+                .orderCheckIn(idNarocila, qrCode);
+    }
+
 
 
 

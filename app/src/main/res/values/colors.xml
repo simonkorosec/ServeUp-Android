@@ -14,6 +14,9 @@
     <color name="backIconColor">#545454</color>
     <color name="transparentGrey">#9bf7f7f7</color>
     <color name="cardview_border_color">#d1d1d1</color>
+    <color name="order_status_new">#67dc61</color>
+    <color name="order_status_finished">#e24b3a</color>
+    <color name="order_status_prepared">#e2ce3a</color>
 
 </resources>
 

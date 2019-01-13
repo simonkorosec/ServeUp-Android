@@ -23,7 +23,6 @@ import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.utils.Utils;
 import serve.serveup.utils.adapters.DiscoveryRecyclerAdapter;
 import serve.serveup.views.SearchActivity;
-import serve.serveup.views.order.PaymentOptionActivity;
 import serve.serveup.webservices.RestManagement;
 
 public class HomeFragment extends Fragment {
@@ -57,8 +56,7 @@ public class HomeFragment extends Fragment {
         myProgressBarLayout.setVisibility(View.VISIBLE);
         searchButton = rootView.findViewById(R.id.searchButton);
 
-        /*myProgressBar.getIndeterminateDrawable()
-                .setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorDarkGrey), PorterDuff.Mode.SRC_IN );*/
+
 
         /*
          TODO hardcoded refrence to LOCATION, need to change it on the current location of the device

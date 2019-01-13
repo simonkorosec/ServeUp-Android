@@ -32,7 +32,7 @@ public class BasketFragment extends Fragment {
     private ImageView incMinutesButton;
     private ImageView decMinutesButton;
     private TextView totalMinutesText;
-    private int totalMinutes = 10;
+    private int totalMinutes = 30;
     private int minutes = 10;
     private ContentStore cntStore;
 
@@ -63,6 +63,7 @@ public class BasketFragment extends Fragment {
         incMinutesButton = rootView.findViewById(R.id.incMinutes);
         decMinutesButton = rootView.findViewById(R.id.decMinutes);
         totalMinutesText = rootView.findViewById(R.id.minute);
+
         cntStore = new ContentStore(getActivity());
 
         setIncrAndDecrMinutes();
@@ -105,7 +106,7 @@ public class BasketFragment extends Fragment {
         decMinutesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (totalMinutes > 10) {
+                if (totalMinutes > 30) {
                     totalMinutes -= minutes;
                     totalMinutesText.setText(String.valueOf(totalMinutes));
                 }

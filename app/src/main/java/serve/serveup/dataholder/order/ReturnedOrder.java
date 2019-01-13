@@ -23,6 +23,8 @@ public class ReturnedOrder implements Serializable {
     private int status;
     @Json(name = "jedi")
     private List<MealInfo> meals;
+    @Json(name = "checked_in")
+    private boolean checkedIn;
 
 
     public void setCasNarocila(String casNarocila) {
@@ -51,6 +53,10 @@ public class ReturnedOrder implements Serializable {
         this.imeRestavracije = imeRestavracije;
     }
 
+    public void setCheckedIn(boolean checkedIn) {
+        this.checkedIn = checkedIn;
+    }
+
     public String getCasNarocila() {
         return casNarocila;
     }
@@ -76,5 +82,9 @@ public class ReturnedOrder implements Serializable {
 
     public String getImeRestavracije() {
         return imeRestavracije;
+    }
+
+    public boolean getCheckedIn() {
+        return checkedIn;
     }
 }
