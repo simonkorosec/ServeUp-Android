@@ -65,12 +65,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_weight="1"
         android:text="Nearby"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"/>
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/discoveryRecyclerView"
@@ -80,6 +81,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
+        android:layout_gravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -87,12 +89,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/searchButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/search_bar_layout_drawable"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,21 +104,26 @@
 
         <TextView
             android:id="@+id/searchText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:gravity="center_vertical"
-            android:text="Search"
-            android:textColor="@color/searchIconColor"
-            android:textSize="18sp"/>
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingStart="32dp"
+            android:text="@string/find_button"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorLightGrey"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="240dp"
-            android:tint="@color/searchIconColor"
-            app:srcCompat="@drawable/ic_baseline_search_24px"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="3"
+            android:tint="@color/colorLightGrey"
+            app:srcCompat="@drawable/ic_baseline_search_24px" />
 
     </LinearLayout>
 

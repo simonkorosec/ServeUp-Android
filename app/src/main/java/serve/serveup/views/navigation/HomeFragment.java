@@ -1,6 +1,7 @@
 package serve.serveup.views.navigation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,8 @@ import serve.serveup.R;
 import serve.serveup.dataholder.RestaurantInfo;
 import serve.serveup.utils.Utils;
 import serve.serveup.utils.adapters.DiscoveryRecyclerAdapter;
+import serve.serveup.views.SearchActivity;
+import serve.serveup.views.order.PaymentOptionActivity;
 import serve.serveup.webservices.RestManagement;
 
 public class HomeFragment extends Fragment {
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout myProgressBarLayout;
     // Contains data of every restaurant home page info
     private List<RestaurantInfo> restaurantHomes;
+    private LinearLayout searchButton;
 
 
     public HomeFragment() {
@@ -51,6 +55,8 @@ public class HomeFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         myProgressBarLayout = rootView.findViewById(R.id.loadingProgressBarContainer);
         myProgressBarLayout.setVisibility(View.VISIBLE);
+        searchButton = rootView.findViewById(R.id.searchButton);
+
         /*myProgressBar.getIndeterminateDrawable()
                 .setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorDarkGrey), PorterDuff.Mode.SRC_IN );*/
 
@@ -79,6 +85,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<List<RestaurantInfo>> call, Throwable t) {
                 Utils.logInfo("API call 'restaurant/home/' failed!");
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(myIntent);
             }
         });
 
