@@ -13,9 +13,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/serveup_logo_foreground"
+        android:icon="@mipmap/serveup_logo2_foreground"
+        android:roundIcon="@mipmap/serveup_logo2_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/serveup_logo_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
