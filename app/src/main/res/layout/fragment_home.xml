@@ -104,22 +104,25 @@
 
         <TextView
             android:id="@+id/searchText"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:gravity="center_vertical"
-            android:text="Search"
-            android:textColor="@color/searchIconColor"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingStart="32dp"
+            android:text="@string/find_button"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorLightGrey"
             android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginRight="16dp"
-            android:adjustViewBounds="false"
-            android:tint="@color/searchIconColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="3"
+            android:tint="@color/colorLightGrey"
             app:srcCompat="@drawable/ic_baseline_search_24px" />
 
     </LinearLayout>

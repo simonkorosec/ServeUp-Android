@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import serve.serveup.R;
 import serve.serveup.utils.Utils;
@@ -12,7 +13,7 @@ import serve.serveup.utils.Utils;
 public class SearchActivity extends AppCompatActivity {
 
     private ImageView backButton;
-    private Button findButton;
+    private LinearLayout searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         backButton = findViewById(R.id.backButton);
-        findButton = findViewById(R.id.findButton);
+        searchButton = findViewById(R.id.searchButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +30,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        findButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utils.showToast(getApplicationContext(), "Search function comes with PRO version:)");

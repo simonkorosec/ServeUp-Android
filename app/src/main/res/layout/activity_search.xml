@@ -70,7 +70,7 @@
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/colorLightGrey"
             app:cardCornerRadius="25dp"
-            app:cardElevation="3dp">
+            app:cardElevation="2dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -85,8 +85,9 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     android:ems="10"
+                    android:hint="@string/find_location"
                     android:inputType="textPersonName"
-                    android:text="@string/find_location" />
+                    android:textColor="@color/backIconColor" />
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
@@ -100,7 +101,7 @@
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/colorLightGrey"
             app:cardCornerRadius="25dp"
-            app:cardElevation="3dp">
+            app:cardElevation="2dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -113,8 +114,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="@string/find_food"
                     android:inputType="textPersonName"
-                    android:text="@string/find_food" />
+                    android:textColor="@color/backIconColor" />
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
@@ -126,7 +128,7 @@
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/colorLightGrey"
             app:cardCornerRadius="25dp"
-            app:cardElevation="3dp">
+            app:cardElevation="2dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -139,8 +141,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="@string/find_from"
                     android:inputType="textPersonName"
-                    android:text="@string/find_from" />
+                    android:textColor="@color/backIconColor" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
@@ -151,7 +154,7 @@
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/colorLightGrey"
             app:cardCornerRadius="25dp"
-            app:cardElevation="3dp">
+            app:cardElevation="2dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -164,28 +167,51 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="@string/find_to"
                     android:inputType="textPersonName"
-                    android:text="@string/find_to" />
+                    android:textColor="@color/backIconColor" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/findButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+    <LinearLayout
+        android:id="@+id/searchButton"
+        android:layout_width="296dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorAccent"
-        android:elevation="2dp"
-        android:text="@string/find_button"
-        android:textStyle="bold"
+        android:background="@drawable/add_to_basket_button_shape"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.25"
-        tools:text="@string/find_button" />
+        app:layout_constraintVertical_bias="0.19">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingStart="50dp"
+            android:text="@string/find_button"
+            android:textColor="@color/colorLightGrey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="3"
+            android:tint="@color/colorLightGrey"
+            app:srcCompat="@drawable/ic_baseline_search_24px" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
