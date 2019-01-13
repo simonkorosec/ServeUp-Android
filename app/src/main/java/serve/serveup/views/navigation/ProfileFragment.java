@@ -106,10 +106,10 @@ public class ProfileFragment extends Fragment {
 
     private void fillUpUserOptions() {
         userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_email_24px), userEmail));
-        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_account_set_up), "Account info"));
-        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_settings_20px), "Settings"));
-        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_sign_out_icon), "Log out"));
-        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_info_24px), "About the app"));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_account_set_up), getString(R.string.account_info)));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_settings_20px), getString(R.string.settings)));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_sign_out_icon), getString(R.string.log_out)));
+        userOptionsData.add(new ProfileOption(retDrawable(R.drawable.ic_baseline_info_24px), getString(R.string.about_app)));
     }
 
     private Drawable retDrawable(int resourceID) {

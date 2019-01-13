@@ -154,38 +154,20 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
-            android:id="@+id/button_sign_in"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="100dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="161dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="162dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorAccent"
-            android:text="@string/sign_in"
-            app:layout_constraintBottom_toTopOf="@+id/textSignUp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.481"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.483" />
-
-        <Button
             android:id="@+id/fakeLogin"
-            android:layout_width="110dp"
-            android:layout_height="41dp"
+            android:layout_width="290dp"
+            android:layout_height="42dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Fake login"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorAccent"
+            android:text="@string/log_in"
             app:layout_constraintBottom_toTopOf="@+id/textSignUp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_sign_in"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <ImageView
             android:id="@+id/imageView2"

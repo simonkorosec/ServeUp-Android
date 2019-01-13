@@ -91,7 +91,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
             public void onClick(View view) {
 
                 pickedOrder = orders.get(holder.getAdapterPosition());
-                Utils.logInfo("checked in: " + pickedOrder.getCheckedIn());
                 if (pickedOrder != null) {
                     Intent myIntent = new Intent(view.getContext(), PickedOrderActivity.class);
                     myIntent.putExtra("picked_order", pickedOrder);

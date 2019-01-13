@@ -135,11 +135,6 @@ public class BasketFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Utils.logInfo("Onstart");
-    }
 
     @Override
     public void onResume() {

@@ -14,8 +14,8 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/serveup_logo2_foreground"
-        android:roundIcon="@mipmap/serveup_logo2_foreground"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/serveup_logo2_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -75,7 +75,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme"/>
         <activity
-            android:name=".views.SearchActivity"
+            android:name=".views.search.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SearchActivityTheme">
         </activity>
@@ -90,6 +90,11 @@
         </activity>
         <activity
             android:name=".views.order.ProcessingQRCodeConfirmationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+        </activity>
+        <activity
+            android:name=".views.search.SearchedRestaurantsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
         </activity>
